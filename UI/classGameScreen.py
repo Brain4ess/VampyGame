@@ -6,7 +6,7 @@ from dataclasses import dataclass
 @dataclass
 class GameScreen:
     size: tuple = (1280, 720)
-    caption: str = "Rename"
+    caption: str = "GitSurvivors"
     icon: str = ""
     
     def __post_init__(self):
