@@ -1,6 +1,6 @@
 import pygame as pg
 from sys import exit
-#t
+#tbb
 pg.init()
 #test123
 #test222
