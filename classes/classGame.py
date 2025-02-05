@@ -22,7 +22,6 @@ class Game:
             self.screen = pg.display.set_mode(GameScreen.size)
             
         self.bg = load(self.imageBG).convert()
-        self.screen.blit(self.bg, (self.screen.get_width() // 2 - 512, self.screen.get_height() // 2 - 512))
         self.run = True
         self.clock = pg.time.Clock()
         self.player = Character(self.screen, 5)
@@ -37,7 +36,7 @@ class Game:
         while self.run:
             
             self.eventGame()
-            self.screen.blit(self.bg, (self.screen.get_width() // 2 - 512, self.screen.get_height() // 2 - 512))
+            self.screen.blit(self.bg, ((self.screen.get_width() // 2) - (self.bg.get_width() // 2), (self.screen.get_height() // 2) - (self.bg.get_height() // 2)))
             self.player.update()
             pg.display.update()
             self.clock.tick(self.fps)
