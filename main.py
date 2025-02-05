@@ -11,7 +11,7 @@ if not cfg.has_section('Settings'):
     cfg.set('Settings', 'fps', '60')
     
 pg.init()
-
+#hi there
 if __name__ == "__main__":
     
     Game = Game()
