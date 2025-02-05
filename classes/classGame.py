@@ -9,7 +9,7 @@ from pygame.image import load
 
 class Game:
     def __init__(self):
-        self.imageBG = 'assets/images/placeholders/maps/GitMap_cross.png'
+        self.imageBG = 'assets/images/placeholders/maps/BigMapPlaceholder.png'
         self.cfg = 'data/config.ini'
         config = cfgp.ConfigParser()
         config.read(self.cfg)
