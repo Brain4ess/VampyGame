@@ -48,13 +48,14 @@ class Character(Sprite):
         if keys[K_s]:
             self.rect.y += self.curspeed
                         
-    def direction(self):
+    def direction(self, offset: pg.math.Vector2 = (0, 0)):
+        offset_pos = self.rect.topleft - offset
         if self.side == 'right':
-            self.screen.blit(self.sprHeroRight[0], self.rect)
+            self.screen.blit(self.sprHeroRight[0], offset_pos)
         if self.side == 'left':
-            self.screen.blit(self.sprHeroLeft[0], self.rect)
+            self.screen.blit(self.sprHeroLeft[0], offset_pos)
     
-    def update(self):
+    def update(self, offset: pg.math.Vector2 = (0, 0)):
         self.eventKey()
-        self.direction()
+        self.direction(offset)
     
