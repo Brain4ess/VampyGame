@@ -6,6 +6,7 @@ from classes.classBackground import BG
 from classes.classCharacter import Character
 from pygame.transform import scale, flip
 from pygame.image import load
+from classes.classCamera import Camera
 
 class Game:
     def __init__(self):
@@ -20,9 +21,9 @@ class Game:
             print(f"Error: {exception}. Using default")
             self.fps = 60
             self.screen = pg.display.set_mode(GameScreen.size)
-            
         self.bg = load(self.imageBG).convert()
         self.run = True
+        self.camera = Camera(self.screen, self.bg.get_width(), self.bg.get_height())
         self.clock = pg.time.Clock()
         self.player = Character(self.screen, 5)
         
@@ -36,7 +37,11 @@ class Game:
         while self.run:
             
             self.eventGame()
-            self.screen.blit(self.bg, ((self.screen.get_width() // 2) - (self.bg.get_width() // 2), (self.screen.get_height() // 2) - (self.bg.get_height() // 2)))
-            self.player.update()
+            
+            offsetbg = self.bg.get_rect().topleft - self.camera.getoffset()
+            self.screen.blit(self.bg, offsetbg)
+            
+            self.player.update(self.camera.getoffset())
+            self.camera.update(self.player)
             pg.display.update()
             self.clock.tick(self.fps)
