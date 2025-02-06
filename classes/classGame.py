@@ -10,7 +10,7 @@ from classes.classCamera import Camera
 
 class Game:
     def __init__(self):
-        self.imageBG = 'assets/images/placeholders/maps/BigMapPlaceholder.png'
+        self.imageBG = 'assets/images/placeholders/maps/BigMapPlaceholderCenterDot.png'
         self.cfg = 'data/config.ini'
         config = cfgp.ConfigParser()
         config.read(self.cfg)
@@ -21,11 +21,13 @@ class Game:
             print(f"Error: {exception}. Using default")
             self.fps = 60
             self.screen = pg.display.set_mode(GameScreen.size)
-        self.bg = load(self.imageBG).convert()
+        
+        self.bg = BG(self.imageBG, self.screen, spawnpoint=(300, 300))
         self.run = True
-        self.camera = Camera(self.screen, self.bg.get_width(), self.bg.get_height())
-        self.clock = pg.time.Clock()
+        self.camera = Camera(self.screen, self.bg.width, self.bg.height, self.bg)
         self.player = Character(self.screen, 5)
+        self.clock = pg.time.Clock()
+        
         
         
     def eventGame(self):
@@ -38,8 +40,9 @@ class Game:
             
             self.eventGame()
             
-            offsetbg = self.bg.get_rect().topleft - self.camera.getoffset()
-            self.screen.blit(self.bg, offsetbg)
+            # offsetbg = self.bg.get_rect().topleft - self.camera.getoffset()
+            # self.screen.blit(self.bg, offsetbg)
+            self.bg.blitBG(self.camera.getoffset())
             
             self.player.update(self.camera.getoffset())
             self.camera.update(self.player)
