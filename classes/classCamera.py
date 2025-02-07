@@ -12,15 +12,15 @@ class Camera:
     # def apply(self, entity: pg.Surface):
     #     return entity.get_rect().move(self.camera.topleft)
     
-    def draw(self, surface: pg.Surface, group):
-        for sprite in group:
-            surface.blit(sprite.image, self.apply(sprite))
+    # def draw(self, surface: pg.Surface, group):
+    #     for sprite in group:
+    #         surface.blit(sprite.image, self.apply(sprite))
     
     def getoffset(self):
         return pg.math.Vector2(self.camera.topleft[0], self.camera.topleft[1])
     
-    def getabsoffset(self, target: Character):
-        return pg.math.Vector2(target.rect.centerx - self.screen.get_width() / 2, target.rect.centery - self.screen.get_height() / 2)
+    # def getabsoffset(self, target: Character):
+    #     return pg.math.Vector2(target.rect.centerx - self.screen.get_width() / 2, target.rect.centery - self.screen.get_height() / 2)
     
     def update(self, target: Character):
         """
