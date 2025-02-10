@@ -5,17 +5,17 @@ from pygame.image import load
 from pygame.transform import scale, flip
 
 class Character(Sprite):
-    
     def __init__(self, bg, screen: pg.Surface = None, speed: int = 0):
         super().__init__()
         self.screen = screen
         self.speed = speed
-        self.curspeed = self.speed
+        self.curspeed = self.speed 
         self.size = (64, 64)
         self.side = 'right'
         self.bg = bg
         self.__post_init__()
-
+    
+    
     def __post_init__(self):
         self.scrWidth = self.screen.get_width()
         self.scrHeight = self.screen.get_height()
@@ -27,10 +27,12 @@ class Character(Sprite):
         self.heroCreate()
         self.rect = self.sprHeroRight[0].get_rect(center = (self.scrWidth / 2, self.scrHeight / 2))
         self.oldY = self.rect.y
-        
+    
+    
     def heroCreate(self):
         self.sprHeroRight.append(scale(load('assets/images/placeholders/character/characterplaceholder.png'), self.size))
         self.sprHeroLeft.append(flip(self.sprHeroRight[0], True, False))
+    
     
     def eventKey(self, event = None):
         keys = pg.key.get_pressed()
@@ -48,13 +50,15 @@ class Character(Sprite):
             self.rect.y -= self.curspeed
         if keys[K_s]:
             self.rect.y += self.curspeed
-                        
+    
+    
     def direction(self, offset: pg.math.Vector2 = (0, 0)):
         offset_pos = self.rect.topleft - offset
         if self.side == 'right':
             self.screen.blit(self.sprHeroRight[0], offset_pos)
         if self.side == 'left':
             self.screen.blit(self.sprHeroLeft[0], offset_pos)
+    
     
     def update(self, offset: pg.math.Vector2 = (0, 0)):
         # When the player reaches the threshold value we stop moving in the direction the player has reached the end of a background
@@ -63,5 +67,4 @@ class Character(Sprite):
         
         self.eventKey()
         self.direction(offset)
-        print(self.rect.center)
-    
+        # print(self.rect.center) # DEBUG

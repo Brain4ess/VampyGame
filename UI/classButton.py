@@ -2,70 +2,113 @@ import pygame as pg
 from pygame.locals import MOUSEMOTION, MOUSEBUTTONDOWN, MOUSEBUTTONUP
 from pygame.font import Font, SysFont
 from pygame.image import load
+from dataclasses import dataclass, field, InitVar
 
+@dataclass
 class Button:
-    def __init__(self, x, y, width, height, text, font, color, hover_color, click_color, image=None, image_hover=None, image_click=None):
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
-        self.text = text
-        self.font = font
-        self.color = color
-        self.hover_color = hover_color
-        self.click_color = click_color
-        
-        self.image = image
-        self.image_hover = image_hover
-        self.image_click = image_click
+    """
+    A class representing a button with customizable properties and behaviors.
 
-        self.rect = pg.Rect(self.x, self.y, self.width, self.height)
-        self.text_surface = self.font.render(self.text, True, self.color)
-        self.text_rect = self.text_surface.get_rect(center=self.rect.center)
+    This class provides a way to create a button with various visual and functional properties.
+    It supports text and image rendering, color changes on hover and click, and event handling
+    for mouse interactions.
 
-        self.hovered = False
-        self.clicked = False
+    Attributes:
+        pos (tuple): Position of the button on the screen (x, y).
+        size (tuple): Size of the button (width, height).
+        image (str): Path to the image file to be displayed on the button.
+        text (str): Text to be displayed on the button.
+        font (InitVar[str]): Font name to be used for rendering the text.
+        defaultSysFont (str): Default system font to be used if no font is specified.
+        fontSize (int): Font size for rendering the text.
+        bgColor (str | tuple[int, int, int]): Background color of the button.
+        textColor (str | tuple[int, int, int]): Text color.
+        hoverColor (str | tuple[int, int, int]): Color of the button when hovered.
+        clickColor (str | tuple[int, int, int]): Color of the button when clicked.
+        isHovered (bool): Flag indicating if the mouse is hovering over the button.
+        isClicked (bool): Flag indicating if the button is clicked.
+        onClickReferences (object): Reference to the function to be called on click.
+        referenceArgs (tuple): Arguments to be passed to the onClickReferences function.
+        referenceKwargs (dict): Keyword arguments to be passed to the onClickReferences function.
 
-    def draw(self, screen):
-        if self.image:
-            if self.hovered and self.image_hover:
-                screen.blit(self.image_hover, self.rect)
-            elif self.clicked and self.image_click:
-                screen.blit(self.image_click, self.rect)
-            else:
-                screen.blit(self.image, self.rect)
+    Methods:
+        __post_init__(font: str): Initializes the button's font.
+        update(surface): Updates the button's appearance on the given surface.
+        handleEvent(event): Handles mouse events to update the button's state.
+    """
+    
+    
+    pos: tuple = (0, 0)
+    size: tuple = (20, 20)
+
+    image: str = None
+
+    text: str = None
+    font: InitVar[str] = None
+    defaultSysFont: str = 'Arial'
+    fontSize: int = 26
+
+    bgColor: str | tuple[int, int, int] = (0, 0, 0)
+    textColor: str | tuple[int, int, int] = 'white'
+    hoverColor: str | tuple[int, int, int] = (0, 0, 0)
+    clickColor: str | tuple[int, int, int] = (0, 0, 0)
+
+    isHovered: bool = False
+    isClicked: bool = False
+
+    onClickReferences: object = None
+    referenceArgs: tuple = field(default_factory = tuple)
+    referenceKwargs: dict = field(default_factory = dict)
+
+
+    def __post_init__(self, font: str):
+        """
+        Initialize the rectangle and font attributes for the Text object.
+
+        Args:
+            font (str): The name of the font to use. If None, the system default font will be used.
+        """
+        self.rect = pg.Rect(self.pos[0], self.pos[1], self.size[0], self.size[1])
+        self.font = Font(font, self.fontSize) if font else SysFont(self.defaultSysFont, self.fontSize)
+
+
+    def update(self, surface):
+        if self.isClicked:
+            self.color = self.clickColor
+        elif self.isHovered:
+            self.color = self.hoverColor
         else:
-            if self.hovered:
-                pg.draw.rect(screen, self.hover_color, self.rect)
-            elif self.clicked:
-                pg.draw.rect(screen, self.click_color, self.rect)
-            else:
-                pg.draw.rect(screen, self.color, self.rect)
+            self.color = self.bgColor
 
-        screen.blit(self.text_surface, self.text_rect)
+        pg.draw.rect(surface, self.color, self.rect, border_radius = 20)
 
-    def update(self, event):
+        if self.text:
+            textSurface = self.font.render(self.text, True, self.textColor)
+            textRect = textSurface.get_rect(center = self.rect.center)
+            surface.blit(textSurface, textRect)
+        
+        if self.image:
+            image = load(self.image)
+            imageRect = self.image.get_rect(center = self.rect.center)
+            surface.blit(image, imageRect)
+
+
+    def handleEvent(self, event):
+        # Check if the event is a mouse motion event
         if event.type == MOUSEMOTION:
-            self.hovered = self.rect.collidepoint(event.pos)
+            # Check if the mouse is hovering over the rectangle
+            self.isHovered = self.rect.collidepoint(event.pos)
+        # Check if the event is a mouse button down event
         elif event.type == MOUSEBUTTONDOWN:
-            if event.button == 1:
-                self.clicked = self.rect.collidepoint(event.pos)
+            # Check if the left mouse button is pressed and the mouse is over the rectangle
+            if event.button == 1 and self.rect.collidepoint(event.pos):
+                # Set the isClicked attribute to True
+                self.isClicked = True
+                # Check if there are any references to call when the button is clicked
+                if self.onClickReferences:
+                    # Call the references with the reference arguments and keyword arguments
+                    self.onClickReferences(*self.referenceArgs, **self.referenceKwargs)
+        # Check if the event is a mouse button up event
         elif event.type == MOUSEBUTTONUP:
-            if event.button == 1:
-                self.clicked = False
-
-    def is_clicked(self):
-        return self.clicked
-
-# Example usage
-# button = Button(100, 100, 200, 50, "Click Me", font, (255, 255, 255), (200, 200, 200), (150, 150, 150))
-# button.draw(screen)
-# button.update(event)
-# if button.is_clicked():
-#     print("Button clicked!")
-#     # Do something when the button is clicked
-#     button.clicked = False
-#     # Reset the clicked state after handling the click
-#     # This is important to prevent the button from triggering multiple times
-#     # when the mouse button is held down
-#     # You can also add a delay or cooldown to prevent rapid clicking
+            # Set the isClicked attribute to False
+            self.isClicked = False
