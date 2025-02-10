@@ -19,8 +19,8 @@ class Character(Sprite):
         self.scrWidth = self.screen.get_width()
         self.scrHeight = self.screen.get_height()
         
-        self.sprHeroLeft = list()
-        self.sprHeroRight = list()
+        self.sprHeroLeft: list[pg.Surface] = list()
+        self.sprHeroRight: list[pg.Surface] = list()
         self.sgroup = pg.sprite.Group()
         
         self.heroCreate()
@@ -58,4 +58,5 @@ class Character(Sprite):
     def update(self, offset: pg.math.Vector2 = (0, 0)):
         self.eventKey()
         self.direction(offset)
+        print(self.rect.center)
     

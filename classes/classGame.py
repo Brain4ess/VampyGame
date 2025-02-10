@@ -22,7 +22,7 @@ class Game:
             self.fps = 60
             self.screen = pg.display.set_mode(GameScreen.size)
         
-        self.bg = BG(self.imageBG, self.screen, spawnpoint=(300, 300))
+        self.bg = BG(self.imageBG, self.screen, spawnpoint=(5120, 5120))
         self.run = True
         self.camera = Camera(self.screen, self.bg.width, self.bg.height, self.bg)
         self.player = Character(self.screen, 5)
