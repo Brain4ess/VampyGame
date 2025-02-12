@@ -7,10 +7,10 @@ from classes.classCamera import Camera
 
 class Game:
     def __init__(self, screen: GameScreen, fps: int):
-        self.imageBG = 'assets/images/placeholders/maps/BigMapPlaceholderCenterDot.png'
+        self.mapImage = 'assets/images/placeholders/maps/BigMapPlaceholderCenterDot.png'
         self.fps = fps
         self.screen = screen
-        self.bg = BG(self.imageBG, self.screen, spawnpoint=(500, 500))
+        self.bg = BG(self.mapImage, self.screen, spawnpoint=(500, 500))
         self.run = True
         self.camera = Camera(self.screen, self.bg.width, self.bg.height, self.bg)
         self.player = Character(self.bg, self.screen, 5)
