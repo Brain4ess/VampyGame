@@ -4,13 +4,22 @@ from pygame.image import load
 from dataclasses import dataclass
 
 @dataclass
-class GameScreen:
+class GameScreen(pg.Surface):
     size: tuple = (1280, 720)
-    caption: str = "GitSurvivors"
+    caption: str = ""
     icon: str = ""
+    
     
     def __post_init__(self):
         self.win = set_mode(self.size)
         set_caption(self.caption)
         if self.icon:
             set_icon(load(self.icon))
+    
+    
+    def get_screen(self):
+        return self.win
+    
+    
+    def set_caption(self, caption: str):
+        set_caption(caption)
