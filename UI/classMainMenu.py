@@ -2,7 +2,10 @@ import pygame as pg
 from classes.classGame import Game
 from UI.classGameScreen import GameScreen
 from classes.classBackground import BG
-from UI.classButton import Button
+from pygame.image import load
+from pygame.transform import scale
+#from UI.classButton import Button
+from UI.actualButton import Button
 
 class MainMenu:
     def __init__(self, screen: GameScreen, fps: int):
@@ -15,27 +18,54 @@ class MainMenu:
     def buildMenu(self, type: str):
         if type == "main":
             self.screen.set_caption("Main Menu")
-            self.buttons = [
-            Button((self.screen.get_screen().get_width() / 2 - 100, self.screen.get_screen().get_height() / 2 + 50), (200, 50), text='Play', onClickReferences=self.playbutton),
-            Button((self.screen.get_screen().get_width() / 2 - 100, self.screen.get_screen().get_height() / 2 + 150) , (200, 50), text='Settings', onClickReferences=self.switchToOptions),
-            Button((self.screen.get_screen().get_width() / 2 - 100, self.screen.get_screen().get_height() / 2 + 250) , (200, 50), text='Quit', onClickReferences=self.quitGame)
-            ]
+            self.playButton = Button(self.screen.get_screen(), 
+                   scale(load('assets/images/placeholders/buttons/playButton.png'), (400,100)),
+                   self.screen.get_screen().get_width() / 2,
+                   self.screen.get_screen().get_height() / 2 + 50,
+                   text_input='Play',
+                   font = 'Algerian',
+                   text_color=(176, 55, 80))
+            self.settingsButton = Button(self.screen.get_screen(),
+                   scale(load('assets/images/placeholders/buttons/settingsButton.png'), (400,100)),
+                   self.screen.get_screen().get_width() / 2,
+                   self.screen.get_screen().get_height() / 2 + 170,
+                   text_input='Settings',
+                   font = 'Algerian',
+                   text_color=(176, 55, 80))
+            self.quitButton = Button(self.screen.get_screen(),
+                   scale(load('assets/images/placeholders/buttons/quitButton.png'), (400,100)),
+                   self.screen.get_screen().get_width() / 2,
+                   self.screen.get_screen().get_height() / 2 + 290,
+                   text_input='Quit',
+                   font = 'Algerian',
+                   text_color=(176, 55, 80))
             self.menu = Menu(self.screen, self.fps, "assets/images/Background/MainMenu_Background.png", self.buttons)
         
     def runCurrent(self):
         self.menu.running = True
         while self.menu.running:
-            self.menu.eventListener()
             self.menu.bg.blitStatic()
             
-            for button in self.buttons:
-                button.handleEvent(pg.event.poll())
-                button.update(self.screen.get_screen())
+            for button in [self.playButton, self.settingsButton, self.quitButton]:
+                    button.update()
+                    button.changeColor(pg.mouse.get_pos())
+                    
+            if pg.event.poll().type == pg.MOUSEBUTTONDOWN:
+                if self.playButton.checkForInput(pg.mouse.get_pos()):
+                    self.playbutton()
+                if self.settingsButton.checkForInput(pg.mouse.get_pos()):
+                    self.switchToOptions()
+                if self.quitButton.checkForInput(pg.mouse.get_pos()):
+                    self.quitGame()
+            if pg.event.poll().type == pg.QUIT:
+                self.menu.running = False
+                    
             pg.display.update()
             self.menu.clock.tick(self.fps)
     
     def playbutton(self):
-        print("play")
+        self.menu.running = False
+        self.game.runGame()
     
     
     def switchToOptions(self):
@@ -54,42 +84,10 @@ class Menu:
         self.imageBG = imageBG
         self.game = Game(self.screen.get_screen(), self.fps)
         self.clock = pg.time.Clock()
-        self.bg = BG(self.imageBG, self.screen.get_screen())
+        self.bg = BG(self.imageBG, self.screen.get_screen(), fill=True)
         self.running = True
         self.buttons = buttons
     
     
     def addbuttons(self, buttons: list[Button]):
         self.buttons.extend(buttons)
-        
-    
-    def eventListener(self):
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                self.running = False
-    
-    
-    #TODO : Make main menu
-    def runMenu(self):
-        while self.running:
-            self.eventListener()
-            
-            
-            self.bg.blitStatic()
-            
-            if len(self.buttons) > 0:
-                for i in self.buttons: # ts pmo sybau atp
-                    for j in pg.event.get():
-                        i.handleEvent(j)
-                    i.update(self.screen.get_screen())
-            
-            pg.display.update()
-            self.clock.tick(self.fps)
-    
-    
-    #TODO : Make options menu
-    def optionsMenu(self):
-        self.screen.set_caption("GitSurvivors: Options")
-        
-        while self.running:
-            pass
