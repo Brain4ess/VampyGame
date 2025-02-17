@@ -23,7 +23,7 @@ PATHS: dict = {
     
     'Fonts': {
         'mainMenu': {
-            'Buttons_caps': 'Algerian',
+            'Buttons_caps': 'assets/fonts/Algerian.ttf',
             'Buttons_regular': 'assets/fonts/Salina-Trial-Regular.otf',
         }
     },

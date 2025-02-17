@@ -26,7 +26,11 @@ class Game:
     
     def runGame(self):
         while self.run:
-            self.eventGame()
+            
+            for event in pg.event.get():
+                if event.type == QUIT:
+                    self.run = False
+                    return "QUIT"
             
             self.bg.blitBG(self.camera.getoffset())
             
