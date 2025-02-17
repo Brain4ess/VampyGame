@@ -3,6 +3,7 @@ from pygame.locals import *
 from pygame.sprite import Sprite
 from pygame.image import load
 from pygame.transform import scale, flip
+import data.Constants as const
 
 class Character(Sprite):
     def __init__(self, bg, screen: pg.Surface = None, speed: int = 0):
@@ -30,11 +31,11 @@ class Character(Sprite):
     
     
     def heroCreate(self):
-        self.sprHeroRight.append(scale(load('assets/images/placeholders/character/characterplaceholder.png'), self.size))
+        self.sprHeroRight.append(scale(load(const.PATHS['Characters']['placeholder']), self.size))
         self.sprHeroLeft.append(flip(self.sprHeroRight[0], True, False))
     
     
-    def eventKey(self, event = None):
+    def eventKey(self):
         keys = pg.key.get_pressed()
         if keys[K_d] and keys[K_s] or keys[K_a] and keys[K_s] or keys[K_d] and keys[K_w] or keys[K_a] and keys[K_w]:
             self.curspeed = self.speed / 1.4

@@ -4,11 +4,12 @@ from UI.classGameScreen import GameScreen
 from classes.classBackground import BG
 from classes.classCharacter import Character
 from classes.classCamera import Camera
+import data.Constants as const
 
 class Game:
-    def __init__(self, screen: GameScreen, fps: int):
-        self.mapImage = 'assets/images/placeholders/maps/BigMapPlaceholderCenterDot.png'
-        self.fps = fps
+    def __init__(self, screen: GameScreen):
+        self.mapImage = const.PATHS['Maps']['mapPlaceholder']
+        self.fps = const.FPS
         self.screen = screen
         self.bg = BG(self.mapImage, self.screen, spawnpoint=(500, 500))
         self.run = True

@@ -6,30 +6,37 @@ import pygame as pg
 #main_font = pg.font.SysFont("cambria", 50)
 class Button():
     def __init__(self, screen: pg.Surface, image: pg.Surface, x_pos, y_pos, text_input, font: str = 'Arial', sysfont = True, text_color = 'white', hover_color = 'green'):
-        
         self.image = image
         self.x_pos = x_pos
         self.y_pos = y_pos
         self.font = font
         self.screen = screen
+        
         if not sysfont:
             self.main_font = pg.font.Font(font, 60)
         else:
             self.main_font = pg.font.SysFont(font, 60)
+        
         self.hoverColor = hover_color
         self.text_color = text_color
+        
         self.rect = self.image.get_rect(center=(self.x_pos, self.y_pos))
+        
         self.text_input = text_input
         self.text = self.main_font.render(self.text_input, True, text_color)
         self.text_rect = self.text.get_rect(center=(self.x_pos, self.y_pos))
+    
+    
     def update(self):
         self.screen.blit(self.image, self.rect)
         self.screen.blit(self.text, self.text_rect)
+    
     
     def checkForInput(self, position):
         if position[0] in range(self.rect.left, self.rect.right) and position[1] in range(self.rect.top, self.rect.bottom):
             return True
         return False
+    
     
     def changeColor(self, position):
         if position[0] in range(self.rect.left, self.rect.right) and position[1] in range(self.rect.top, self.rect.bottom):
