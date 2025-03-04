@@ -68,4 +68,3 @@ class Character(Sprite):
         
         self.eventKey()
         self.direction(offset)
-        # print(self.rect.center) # DEBUG

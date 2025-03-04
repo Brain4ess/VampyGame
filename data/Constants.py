@@ -7,17 +7,30 @@ PATHS: dict = {
     
     'Backgrounds': {
         'mainMenu': 'assets/images/Background/MainMenu_Background.png',
-        'settingsMenu': 'assets/images/Background/MainMenu_Background.png'
+        'settingsMenu': 'assets/images/Background/MainMenu_Background.png',
+        'CharSelector': 'assets/images/Background/MainMenu_Background.png'
     },
     
     
     'Characters': {
-        'placeholder': 'assets/images/placeholders/character/characterplaceholder.png'
+        'placeholder': 'assets/images/placeholders/character/characterplaceholder.png',
+        'placeholder2': 'assets/images/placeholders/character/characterplaceholder.png',
+        'placeholder3': 'assets/images/placeholders/character/characterplaceholder.png'
     },
     
     
     'Maps': {
         'mapPlaceholder': 'assets/images/placeholders/maps/BigMapPlaceholderCenterDot.png',
+    },
+    
+    
+    'Data': {
+        'configFile': 'data/config.ini'
+    },
+    
+    
+    'Music': {
+        'settingsMenu': 'assets/sounds/ButtonClick1.wav'
     },
     
     
@@ -29,8 +42,8 @@ PATHS: dict = {
     },
     
     
-    'Sounds': {
-        
+    'SFX': {
+        'buttonClick1': 'assets/sounds/ButtonClick1.wav'
     }
 }
 

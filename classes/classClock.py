@@ -13,5 +13,6 @@ class Timer:
         self.timeRect = self.timeText.get_rect(center=self.pos)
 
 
+    # TODO: Write timer logic
     def update(self):
         pass
