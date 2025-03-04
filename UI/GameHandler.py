@@ -21,15 +21,26 @@ class GameHandler:
             if returned[0] == "Play":
                 pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
                 self.mainMenu.changeMenu("main", "CharSelector")
-                Creturned = self.mainMenu.runCurrent(self.mainMenu.CharSelectorMenu, [self.mainMenu.CharSelectorButtonsG, self.mainMenu.backButton])
+                while True:
+                    Creturned = self.mainMenu.runCurrent(self.mainMenu.CharSelectorMenu, [self.mainMenu.CharSelectorButtonsG, self.mainMenu.backButton])
+                    if Creturned[0] == "Back":
+                        self.mainMenu.changeMenu("CharSelector", "main")
+                        break
+                    if Creturned[0] != "QUIT" and Creturned[0] != "Back":
+                        self.mainMenu.changeMenu("CharSelector", "MapSelector")
+                        Mreturned = self.mainMenu.runCurrent(self.mainMenu.MapSelectorMenu, [self.mainMenu.MapSelectorButtonsG, self.mainMenu.backButton])
+                        if Mreturned[0] == "Back":
+                            self.mainMenu.changeMenu("MapSelector", "CharSelector")
+                            continue
+                    self.screen.set_caption("GitSurvivors")
+                    Greturned = self.game.runGame()
+                    if Greturned == "QUIT":
+                        break                
                 if Creturned[0] == "Back":
-                    self.mainMenu.changeMenu("settings", "main")
                     continue
-                self.screen.set_caption("GitSurvivors")
-                Greturned = self.game.runGame()
                 if Greturned == "QUIT":
                     break
-                continue
+
             
             elif returned[0] == "Quit":
                 self.running = False

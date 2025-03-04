@@ -8,14 +8,19 @@ PATHS: dict = {
     'Backgrounds': {
         'mainMenu': 'assets/images/Background/MainMenu_Background.png',
         'settingsMenu': 'assets/images/Background/MainMenu_Background.png',
-        'CharSelector': 'assets/images/Background/MainMenu_Background.png'
+        'CharSelector': 'assets/images/Background/MainMenu_Background.png',
+        'MapSelector': 'assets/images/Background/MainMenu_Background.png'
     },
     
     
     'Characters': {
-        'placeholder': 'assets/images/placeholders/character/characterplaceholder.png',
-        'placeholder2': 'assets/images/placeholders/character/characterplaceholder.png',
-        'placeholder3': 'assets/images/placeholders/character/characterplaceholder.png'
+        'CharactersPreview': {
+            'placeholder': 'assets/images/placeholders/character/characterplaceholder.png',
+            'placeholder2': 'assets/images/placeholders/character/characterplaceholder.png',
+            'placeholder3': 'assets/images/placeholders/character/characterplaceholder.png'
+        },
+        
+        'placeholder': 'assets/images/placeholders/character/characterplaceholder.png'
     },
     
     

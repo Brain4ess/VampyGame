@@ -19,7 +19,7 @@ class Menu:
         self.imageBG = imageBG
         self.bg = BG(self.imageBG, self.screen.get_screen(), fill=True)
         self.running = True
-        tp.Button.default_at_unclick = pg.mixer.Sound(file=const.PATHS['SFX']['buttonClick1']).play
+        
 
 class MainMenu:
     def __init__(self, screen: GameScreen):
@@ -29,6 +29,9 @@ class MainMenu:
         self.clock = pg.time.Clock()
         self.buttons = []
         self.fonts = const.PATHS['Fonts']['mainMenu']
+        self.buttonclickSound = pg.mixer.Sound(file=const.PATHS['SFX']['buttonClick1'])
+        self.buttonclickSound.set_volume(cfg.getint('Settings', 'sfxvolume') / 100)
+        tp.Button.default_at_unclick = self.buttonclickSound.play
         self.__post_init__()
         
         
@@ -39,11 +42,11 @@ class MainMenu:
 
 
         self.playButton.at_unclick = self.changeButtonState
-        self.playButton.at_unclick_params = {"button": "play"}
+        self.playButton.at_unclick_params = {"button": self.playButton}
         self.settingsButton.at_unclick = self.changeButtonState
-        self.settingsButton.at_unclick_params = {"button": "settings"}
+        self.settingsButton.at_unclick_params = {"button": self.settingsButton}
         self.quitButton.at_unclick = self.changeButtonState
-        self.quitButton.at_unclick_params = {"button": "quit"}
+        self.quitButton.at_unclick_params = {"button": self.quitButton}
 
 
         self.buttonGroup = tp.Group([self.playButton, self.settingsButton, self.quitButton], gap=20)
@@ -57,9 +60,9 @@ class MainMenu:
         self.applyButton = tp.Button("Apply", SM_BUTTON_STYLES['normal'], SM_BUTTON_STYLES['hover'], SM_BUTTON_STYLES['pressed'])
         self.backButton = tp.Button("Back", SM_BUTTON_STYLES['normal'], SM_BUTTON_STYLES['hover'], SM_BUTTON_STYLES['pressed'])
 
-        self.masterSlider = tp.SliderWithText("Master", 0, 100, 50, 100)
-        self.SFXSlider = tp.SliderWithText("SFX", 0, 100, 50, 100)
-        self.musicSlider = tp.SliderWithText("Music", 0, 100, 50, 100)
+        self.masterSlider = tp.SliderWithText("Master", 0, 100, cfg.getint('Settings', 'mastervolume'), 100)
+        self.SFXSlider = tp.SliderWithText("SFX", 0, 100, cfg.getint('Settings', 'sfxvolume'), 100)
+        self.musicSlider = tp.SliderWithText("Music", 0, 100, cfg.getint('Settings', 'musicvolume'), 100)
         self.audioGroup = tp.Group([self.masterSlider, self.SFXSlider, self.musicSlider], gap=20)
 
         self.reslist = pg.display.list_modes()
@@ -78,22 +81,36 @@ class MainMenu:
 
         self.applyButton.at_unclick = self.applySettings                                                                                                                                                                    
         self.backButton.at_unclick = self.changeButtonState
-        self.backButton.at_unclick_params = {"button": "back"}
+        self.backButton.at_unclick_params = {"button": self.backButton}
 
 
         self.settingsElements = [self.applyButton, self.backButton, self.audioGroup, self.fullscreenCheckbox, self.resolutionDD, self.resolutionText]
         self.settingsMenu = Menu(self.screen, const.PATHS['Backgrounds']['settingsMenu'])
         
         self.CharSelectorButtons = []
-        for keys, values in const.PATHS['Characters'].items(): # TODO: Сделать отдельный словарь для картинок персонажей
+        for keys, values in const.PATHS['Characters']['CharactersPreview'].items():
             self.CharSelectorButtons.append(tp.TextAndImageButton(text=keys, img=scale(load(values), (32, 32)), mode="v"))
-            
+        
+        for i in self.CharSelectorButtons:
+            i.at_unclick = self.changeButtonState
+            i.at_unclick_params = {"button": i}
+            for j in i.children:
+                j.default_at_unclick = self.do_nothing
+        
         self.CharSelectorButtonsG = tp.Group(self.CharSelectorButtons, gap=20, mode="h")
         self.CharSelectorMenu = Menu(self.screen, const.PATHS['Backgrounds']['CharSelector'])
         pg.mixer.music.load(const.PATHS['Music']['settingsMenu'])
         
+        
+        self.MapSelectorButtons = []
+        for keys, values in const.PATHS['Maps'].items():
+            self.MapSelectorButtons.append(tp.TextAndImageButton(text=keys, img=scale(load(values), (128, 128)), mode="h", margins=(10, 15), reverse=True))
+        self.MapSelectorButtonsG = tp.Group(self.MapSelectorButtons, gap=20, mode="v")
+        self.MapSelectorMenu = Menu(self.screen, const.PATHS['Backgrounds']['MapSelector'])
 
-
+    def do_nothing(self):
+        pass
+    
     def runCurrent(self, menu: Menu, buttonGroup: list[tp.Group] | list[tp.elements.Element]):
         menu.running = True
         while menu.running:
@@ -111,11 +128,16 @@ class MainMenu:
                 
                 if self.quitButton.state == "unclicked":
                     return ["Quit", True]
-                
-                
-            if menu == self.settingsMenu or menu == self.CharSelectorMenu:
+            
+            
+            if menu == self.settingsMenu or menu == self.CharSelectorMenu or menu == self.MapSelectorMenu:
                 if self.backButton.state == "unclicked":
                     return ["Back", True]
+            
+            if menu == self.CharSelectorMenu:
+                for i in self.CharSelectorButtons:
+                    if i.state == "unclicked":
+                        return [i.children[0].text, True]
             
             if pg.event.poll().type == pg.QUIT:
                 menu.running = False
@@ -163,20 +185,26 @@ class MainMenu:
             self.backButton.set_invisible(True, True)
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
 
+        if From == "CharSelector" and To == "MapSelector":
+            self.screen.set_caption("GitSurvivors: Map Selector")
+            self.CharSelectorButtonsG.set_invisible(True, True)
+            self.MapSelectorButtonsG.set_invisible(False, True)
+            self.backButton.set_invisible(False, True)
+            pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
 
-    def changeButtonState(self, button: str):
-        # pg.mixer.music.play()
-        if button == "play":
-            self.playButton.state = "unclicked"
-        if button == "settings":
-            self.settingsButton.state = "unclicked"
-        if button == "quit":
-            self.quitButton.state = "unclicked"
-        if button == "back":
-            self.backButton.state = "unclicked"
+        if From == "MapSelector" and To == "CharSelector":
+            self.screen.set_caption("GitSurvivors: Character Selector")
+            self.MapSelectorButtonsG.set_invisible(True, True)
+            self.CharSelectorButtonsG.set_invisible(False, True)
+            self.backButton.set_invisible(False, True)
+            pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
+
+
+    def changeButtonState(self, button: tp.elements.Element):
+        button.state = "unclicked"
+
 
     def applySettings(self):
-        pg.mixer.music.play()
         if self.resolutionDD.get_value() != None:
             res = self.resolutionDD.get_value().split("x")
             cfg.set('Settings', 'width', res[0])
@@ -187,6 +215,7 @@ class MainMenu:
         cfg.set('Settings', 'sfxvolume', str(self.SFXSlider.get_value()))
         with open('data/config.ini', 'w') as configfile:
             cfg.write(configfile)
+
 
     def playbutton(self):
         self.menu.running = False
