@@ -25,7 +25,6 @@ class MainMenu:
     def __init__(self, screen: GameScreen):
         self.screen = screen
         self.fps = const.FPS
-        self.game = Game(self.screen.get_screen())
         self.clock = pg.time.Clock()
         self.buttons = []
         self.fonts = const.PATHS['Fonts']['mainMenu']
@@ -105,6 +104,13 @@ class MainMenu:
         self.MapSelectorButtons = []
         for keys, values in const.PATHS['Maps'].items():
             self.MapSelectorButtons.append(tp.TextAndImageButton(text=keys, img=scale(load(values), (128, 128)), mode="h", margins=(10, 15), reverse=True))
+        
+        for i in self.MapSelectorButtons:
+            i.at_unclick = self.changeButtonState
+            i.at_unclick_params = {"button": i}
+            for j in i.children:
+                j.default_at_unclick = self.do_nothing
+                
         self.MapSelectorButtonsG = tp.Group(self.MapSelectorButtons, gap=20, mode="v")
         self.MapSelectorMenu = Menu(self.screen, const.PATHS['Backgrounds']['MapSelector'])
 
@@ -138,6 +144,11 @@ class MainMenu:
                 for i in self.CharSelectorButtons:
                     if i.state == "unclicked":
                         return [i.children[0].text, True]
+            
+            if menu == self.MapSelectorMenu:
+                for i in self.MapSelectorButtons:
+                    if i.state == "unclicked":
+                        return [i.children[1].text, True]
             
             if pg.event.poll().type == pg.QUIT:
                 menu.running = False
@@ -215,14 +226,6 @@ class MainMenu:
         cfg.set('Settings', 'sfxvolume', str(self.SFXSlider.get_value()))
         with open('data/config.ini', 'w') as configfile:
             cfg.write(configfile)
-
-
-    def playbutton(self):
-        self.menu.running = False
-        self.buttonGroup.set_invisible(True, True)
-        pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
-        self.game.runGame()
-
 
     def switchToMain(self):
         self.settingsMenu.running = False

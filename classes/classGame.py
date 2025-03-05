@@ -7,14 +7,14 @@ from classes.classCamera import Camera
 import data.Constants as const
 
 class Game:
-    def __init__(self, screen: GameScreen):
-        self.mapImage = const.PATHS['Maps']['mapPlaceholder']
+    def __init__(self, screen: GameScreen, mapImage: str, character: str):
+        self.mapImage = mapImage
         self.fps = const.FPS
         self.screen = screen
         self.bg = BG(self.mapImage, self.screen, spawnpoint=(500, 500))
         self.run = True
         self.camera = Camera(self.screen, self.bg.width, self.bg.height, self.bg)
-        self.player = Character(self.bg, self.screen, 5)
+        self.player = Character(self.bg, character, self.screen, 5)
         self.clock = pg.time.Clock()
     
     

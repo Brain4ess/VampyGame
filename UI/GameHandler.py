@@ -2,11 +2,11 @@ import pygame as pg
 import UI.classMainMenu as mm
 from classes.classGame import Game
 from UI.classGameScreen import GameScreen
+from data.Constants import PATHS
 
 class GameHandler:
     def __init__(self, screen: GameScreen):
         self.screen = screen
-        self.game = Game(self.screen.get_screen())
         self.mainMenu = mm.MainMenu(self.screen)
         self.running = True
         self.screen.set_caption("GitSurvivors: Main Menu")
@@ -32,10 +32,16 @@ class GameHandler:
                         if Mreturned[0] == "Back":
                             self.mainMenu.changeMenu("MapSelector", "CharSelector")
                             continue
-                    self.screen.set_caption("GitSurvivors")
-                    Greturned = self.game.runGame()
-                    if Greturned == "QUIT":
-                        break                
+                        
+                        if Mreturned[0] != "QUIT" and Mreturned[0] != "Back":
+                            pg.mouse.set_cursor(pg.SYSTEM_CURSOR_WAIT)
+                            self.mainMenu.changeMenu("MapSelector", "Game")
+                            self.screen.set_caption("GitSurvivors")
+                            self.game = Game(self.screen.get_screen(), PATHS['Maps'][Mreturned[0]], PATHS['Characters'][Creturned[0]])
+                            pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
+                            Greturned = self.game.runGame()
+                            if Greturned == "QUIT":
+                                break                
                 if Creturned[0] == "Back":
                     continue
                 if Greturned == "QUIT":

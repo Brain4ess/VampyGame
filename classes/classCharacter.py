@@ -6,7 +6,7 @@ from pygame.transform import scale, flip
 import data.Constants as const
 
 class Character(Sprite):
-    def __init__(self, bg, screen: pg.Surface = None, speed: int = 0):
+    def __init__(self, bg, character: str, screen: pg.Surface = None, speed: int = 0):
         super().__init__()
         self.screen = screen
         self.speed = speed
@@ -14,6 +14,7 @@ class Character(Sprite):
         self.size = (64, 64)
         self.side = 'right'
         self.bg = bg
+        self.character = character
         self.__post_init__()
     
     
@@ -31,7 +32,7 @@ class Character(Sprite):
     
     
     def heroCreate(self):
-        self.sprHeroRight.append(scale(load(const.PATHS['Characters']['placeholder']), self.size))
+        self.sprHeroRight.append(scale(load(self.character), self.size))
         self.sprHeroLeft.append(flip(self.sprHeroRight[0], True, False))
     
     

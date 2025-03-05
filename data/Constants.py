@@ -16,16 +16,17 @@ PATHS: dict = {
     'Characters': {
         'CharactersPreview': {
             'placeholder': 'assets/images/placeholders/character/characterplaceholder.png',
-            'placeholder2': 'assets/images/placeholders/character/characterplaceholder.png',
+            'placeholder2': 'assets/images/placeholders/character/cat 1.png',
             'placeholder3': 'assets/images/placeholders/character/characterplaceholder.png'
         },
         
-        'placeholder': 'assets/images/placeholders/character/characterplaceholder.png'
+        'placeholder': 'assets/images/placeholders/character/characterplaceholder.png',
+        'placeholder2': 'assets/images/placeholders/character/cat 1.png'
     },
     
     
     'Maps': {
-        'mapPlaceholder': 'assets/images/placeholders/maps/BigMapPlaceholderCenterDot.png',
+        'mapPlaceholder': 'assets/images/placeholders/maps/BigMapPlaceholderCenterDot.png'
     },
     
     
