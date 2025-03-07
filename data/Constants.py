@@ -44,7 +44,8 @@ PATHS: dict = {
         'mainMenu': {
             'Buttons_caps': 'assets/fonts/Algerian.ttf',
             'Buttons_regular': 'assets/fonts/Salina-Trial-Regular.otf',
-        }
+        },
+        'Timer': 'assets/fonts/Salina-Trial-Regular.otf'
     },
     
     
