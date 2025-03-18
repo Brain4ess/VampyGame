@@ -6,6 +6,8 @@ from classes.classCharacter import Character
 from classes.classCamera import Camera
 import data.Constants as const
 from classes.classTimer import Timer
+from classes.EnemyHandler import EnemyHandler
+from UI.GameUI import UI
 
 class Game:
     def __init__(self, screen: GameScreen, mapImage: str, character: str):
@@ -19,6 +21,8 @@ class Game:
         self.clock = pg.time.Clock()
         self.timer = Timer(self.screen, const.PATHS["Fonts"]["Timer"], 'White', 30)
         self.timer.start()
+        self.EnemyHandler = EnemyHandler(self.screen, self.camera, self.player, self.timer)
+        self.ui = UI(self.screen, self.player)
     
     
     def eventGame(self):
@@ -36,8 +40,9 @@ class Game:
                     return "QUIT"
             
             self.bg.blitBG(self.camera.getoffset())
-            
+            self.EnemyHandler.update()
             self.player.update(self.camera.getoffset())
+            self.ui.update()
             self.camera.update(self.player)
             self.timer.update()
             pg.display.update()

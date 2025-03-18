@@ -97,6 +97,11 @@ class MainMenu:
                 j.default_at_unclick = self.do_nothing
         
         self.CharSelectorButtonsG = tp.Group(self.CharSelectorButtons, gap=20, mode="h")
+        self.CharSelectorButtonsGupd = self.CharSelectorButtonsG.get_updater(self.fps)
+        self.backButtonupd = self.backButton.get_updater(self.fps)
+        
+        self.settingsElementsupd = [i.get_updater(self.fps) for i in self.settingsElements]
+        self.buttonGroupupd = self.buttonGroup.get_updater(self.fps)
         self.CharSelectorMenu = Menu(self.screen, const.PATHS['Backgrounds']['CharSelector'])
         pg.mixer.music.load(const.PATHS['Music']['settingsMenu'])
         
@@ -113,6 +118,7 @@ class MainMenu:
                 
         self.MapSelectorButtonsG = tp.Group(self.MapSelectorButtons, gap=20, mode="v")
         self.MapSelectorMenu = Menu(self.screen, const.PATHS['Backgrounds']['MapSelector'])
+        self.MapSelectorButtonsGupd = self.MapSelectorButtonsG.get_updater(self.fps)
 
     def do_nothing(self):
         pass
@@ -123,7 +129,7 @@ class MainMenu:
             menu.bg.blitStatic()
             
             for i in buttonGroup:
-                i.get_updater(self.fps).update()
+                i.update()
                 
             if menu == self.menu:
                 if self.playButton.state == "unclicked":

@@ -14,6 +14,8 @@ class Character(Sprite):
         self.size = (64, 64)
         self.side = 'right'
         self.bg = bg
+        self.hp = 100
+        self.damage = 10
         self.character = character
         self.__post_init__()
     

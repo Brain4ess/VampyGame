@@ -15,13 +15,14 @@ PATHS: dict = {
     
     'Characters': {
         'CharactersPreview': {
-            'placeholder': 'assets/images/placeholders/character/characterplaceholder.png',
+            'placeholder1': 'assets/images/placeholders/character/characterplaceholder.png',
             'placeholder2': 'assets/images/placeholders/character/cat 1.png',
             'placeholder3': 'assets/images/placeholders/character/characterplaceholder.png'
         },
         
-        'placeholder': 'assets/images/placeholders/character/characterplaceholder.png',
-        'placeholder2': 'assets/images/placeholders/character/cat 1.png'
+        'placeholder1': 'assets/images/placeholders/character/characterplaceholder.png',
+        'placeholder2': 'assets/images/placeholders/character/cat 1.png',
+        'placeholder3': 'assets/images/placeholders/character/characterplaceholder.png'
     },
     
     

@@ -13,7 +13,7 @@ class GameHandler:
     
     def mainloop(self):
         while self.running:
-            returned = self.mainMenu.runCurrent(self.mainMenu.menu, [self.mainMenu.buttonGroup])
+            returned = self.mainMenu.runCurrent(self.mainMenu.menu, [self.mainMenu.buttonGroupupd])
             if not returned[1]:
                 self.running = False
                 break
@@ -22,13 +22,13 @@ class GameHandler:
                 pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
                 self.mainMenu.changeMenu("main", "CharSelector")
                 while True:
-                    Creturned = self.mainMenu.runCurrent(self.mainMenu.CharSelectorMenu, [self.mainMenu.CharSelectorButtonsG, self.mainMenu.backButton])
+                    Creturned = self.mainMenu.runCurrent(self.mainMenu.CharSelectorMenu, [self.mainMenu.CharSelectorButtonsGupd, self.mainMenu.backButtonupd])
                     if Creturned[0] == "Back":
                         self.mainMenu.changeMenu("CharSelector", "main")
                         break
                     if Creturned[0] != "QUIT" and Creturned[0] != "Back":
                         self.mainMenu.changeMenu("CharSelector", "MapSelector")
-                        Mreturned = self.mainMenu.runCurrent(self.mainMenu.MapSelectorMenu, [self.mainMenu.MapSelectorButtonsG, self.mainMenu.backButton])
+                        Mreturned = self.mainMenu.runCurrent(self.mainMenu.MapSelectorMenu, [self.mainMenu.MapSelectorButtonsGupd, self.mainMenu.backButtonupd])
                         if Mreturned[0] == "Back":
                             self.mainMenu.changeMenu("MapSelector", "CharSelector")
                             continue
@@ -54,7 +54,7 @@ class GameHandler:
             
             elif returned[0] == "Settings":
                 self.mainMenu.changeMenu("main", "settings")
-                Sreturned = self.mainMenu.runCurrent(self.mainMenu.settingsMenu, self.mainMenu.settingsElements)
+                Sreturned = self.mainMenu.runCurrent(self.mainMenu.settingsMenu, self.mainMenu.settingsElementsupd)
                 if Sreturned[0] == "Back":
                     self.mainMenu.changeMenu("settings", "main")
                     continue
