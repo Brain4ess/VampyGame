@@ -13,19 +13,6 @@ PATHS: dict = {
     },
     
     
-    'Characters': {
-        'CharactersPreview': {
-            'placeholder1': 'assets/images/placeholders/character/characterplaceholder.png',
-            'placeholder2': 'assets/images/placeholders/character/cat 1.png',
-            'placeholder3': 'assets/images/placeholders/character/characterplaceholder.png'
-        },
-        
-        'placeholder1': 'assets/images/placeholders/character/characterplaceholder.png',
-        'placeholder2': 'assets/images/placeholders/character/cat 1.png',
-        'placeholder3': 'assets/images/placeholders/character/characterplaceholder.png'
-    },
-    
-    
     'Maps': {
         'mapPlaceholder': 'assets/images/placeholders/maps/BigMapPlaceholderCenterDot.png'
     },
@@ -37,7 +24,8 @@ PATHS: dict = {
     
     
     'Music': {
-        'settingsMenu': 'assets/sounds/ButtonClick1.wav'
+        'Menu': 'assets/sounds/music/requiem.wav',
+        'Game': 'assets/sounds/music/requiem.wav'
     },
     
     
@@ -51,9 +39,8 @@ PATHS: dict = {
     
     
     'SFX': {
-        'buttonClick1': 'assets/sounds/ButtonClick1.wav'
+        'buttonClick1': 'assets/sounds/SFX/ButtonClick1.wav'
     }
 }
 
 FPS: int = 60
-

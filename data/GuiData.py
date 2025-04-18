@@ -24,7 +24,6 @@ MM_BUTTON_STYLES = {
     'pressed': MM_BUTTON_STYLE_PRESSED
 }
 
-
 SM_BUTTON_STYLE_NORMAL = MM_BUTTON_STYLE_NORMAL.copy()
 SM_BUTTON_STYLE_NORMAL.font = pg.font.Font(const.PATHS['Fonts']['mainMenu']['Buttons_caps'], 30)
 SM_BUTTON_STYLE_NORMAL.size = (300, 60)
@@ -45,3 +44,7 @@ SM_BUTTON_STYLES = {
     'pressed': SM_BUTTON_STYLE_PRESSED,
     'locked': SM_BUTTON_STYLE_LOCKED
 }
+
+IMG_BUTTON_TEXT_STYLE = tp.styles.TextStyle()
+IMG_BUTTON_TEXT_STYLE.font = pg.font.Font(const.PATHS['Fonts']['mainMenu']['Buttons_regular'], 30)
+IMG_BUTTON_TEXT_STYLE.font_color = (176, 55, 80)

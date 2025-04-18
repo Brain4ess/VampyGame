@@ -1,0 +1,12 @@
+[project]
+name = "GitSurvivors"
+version = "0.1.0"
+description = "2D game where the player controls a character and fights enemies while collecting abilities to survive as long as possible."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.2.4",
+    "pillow==11.1.0",
+    "pygame==2.6.1",
+    "thorpy==2.1.11",
+]

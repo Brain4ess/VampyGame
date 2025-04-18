@@ -1,13 +1,13 @@
 import pygame as pg
-from classes.classGame import Game
 from UI.classGameScreen import GameScreen
 from classes.classBackground import BG
 from pygame.image import load
 from pygame.transform import scale
 import configparser as cfgp
 import data.Constants as const
+from data.Characters import CHARACTERS
 import thorpy as tp
-from data.GuiData import MM_BUTTON_STYLES, SM_BUTTON_STYLES
+from data.GuiData import MM_BUTTON_STYLES, SM_BUTTON_STYLES, IMG_BUTTON_TEXT_STYLE
 
 cfg = cfgp.ConfigParser()
 cfg.read('data/config.ini')
@@ -19,7 +19,7 @@ class Menu:
         self.imageBG = imageBG
         self.bg = BG(self.imageBG, self.screen.get_screen(), fill=True)
         self.running = True
-        
+
 
 class MainMenu:
     def __init__(self, screen: GameScreen):
@@ -32,13 +32,12 @@ class MainMenu:
         self.buttonclickSound.set_volume(cfg.getint('Settings', 'sfxvolume') / 100)
         tp.Button.default_at_unclick = self.buttonclickSound.play
         self.__post_init__()
-        
-        
+
+
     def __post_init__(self):
         self.playButton = tp.Button("Play", MM_BUTTON_STYLES['normal'], MM_BUTTON_STYLES['hover'], MM_BUTTON_STYLES['pressed'])
         self.settingsButton = tp.Button("Settings", MM_BUTTON_STYLES['normal'], MM_BUTTON_STYLES['hover'], MM_BUTTON_STYLES['pressed'])
         self.quitButton = tp.Button("Quit", MM_BUTTON_STYLES['normal'], MM_BUTTON_STYLES['hover'], MM_BUTTON_STYLES['pressed'])
-
 
         self.playButton.at_unclick = self.changeButtonState
         self.playButton.at_unclick_params = {"button": self.playButton}
@@ -47,14 +46,11 @@ class MainMenu:
         self.quitButton.at_unclick = self.changeButtonState
         self.quitButton.at_unclick_params = {"button": self.quitButton}
 
-
         self.buttonGroup = tp.Group([self.playButton, self.settingsButton, self.quitButton], gap=20)
         self.buttonGroup.move(0, 100)
         self.buttonGroup.get_updater().manually_updated = True
 
-
         self.menu = Menu(self.screen, const.PATHS['Backgrounds']['mainMenu'])
-
 
         self.applyButton = tp.Button("Apply", SM_BUTTON_STYLES['normal'], SM_BUTTON_STYLES['hover'], SM_BUTTON_STYLES['pressed'])
         self.backButton = tp.Button("Back", SM_BUTTON_STYLES['normal'], SM_BUTTON_STYLES['hover'], SM_BUTTON_STYLES['pressed'])
@@ -68,102 +64,99 @@ class MainMenu:
         self.reslist = [str(self.reslist[i][0]) + "x" + str(self.reslist[i][1]) for i in range(len(self.reslist))]
         self.resolutionDD = tp.DropDownListButton(self.reslist, cfg.get('Settings', 'width') + "x" + cfg.get('Settings', 'height'), SM_BUTTON_STYLES['normal'], style_hover=SM_BUTTON_STYLES["hover"], style_pressed=SM_BUTTON_STYLES["pressed"], style_locked=SM_BUTTON_STYLES["locked"], generate_shadow=(True, True), size_limit=["auto", 250])
         self.resolutionDD.move(self.screen.get_screen().get_width() - SM_BUTTON_STYLES['normal'].margins[0] + 75, self.screen.get_screen().get_height() / 2 - SM_BUTTON_STYLES['normal'].margins[1] - 30)
-        self.resolutionText = tp.Text("Resolution", font_size=20, font_color=SM_BUTTON_STYLES['normal'].font_color, style_normal=SM_BUTTON_STYLES['normal'])
+        self.resolutionText = tp.Text("Resolution", font_size=30, font_color=SM_BUTTON_STYLES['normal'].font_color, style_normal=IMG_BUTTON_TEXT_STYLE)
+        self.resolutionText.move(self.screen.get_screen().get_width() - (SM_BUTTON_STYLES['normal'].margins[0] + 75) - 100, self.screen.get_screen().get_height() / 2 - SM_BUTTON_STYLES['normal'].margins[1] - 30)
+        self.resolutionText.default_at_unclick = self.do_nothing
 
-
-        self.fullscreenCheckbox = tp.Checkbox(style_normal=SM_BUTTON_STYLES["normal"])
-
-
+        self.fullscreenCheckbox = tp.Checkbox(value=cfg.getboolean("Settings", "Fullscreen"),style_normal=SM_BUTTON_STYLES["normal"], style_hover=SM_BUTTON_STYLES["hover"], style_pressed=SM_BUTTON_STYLES["pressed"])
+        self.FullscreenText = tp.Text("Fullscreen", font_size=30, font_color=SM_BUTTON_STYLES['normal'].font_color, style_normal=IMG_BUTTON_TEXT_STYLE)
+        self.FullscreenText.default_at_unclick = self.do_nothing
+        self.fullscreenCheckbox.move(self.screen.get_screen().get_width() / 2 - (SM_BUTTON_STYLES['normal'].margins[0] + 75) - 100, self.screen.get_screen().get_height() / 2 - SM_BUTTON_STYLES['normal'].margins[1] - 30)
+        self.FullscreenText.move(self.screen.get_screen().get_width() / 2 - (SM_BUTTON_STYLES['normal'].margins[0] + 75) - 180, self.screen.get_screen().get_height() / 2 - SM_BUTTON_STYLES['normal'].margins[1] - 33)
+        
         self.applyButton.move(self.screen.get_screen().get_width() - SM_BUTTON_STYLES['normal'].margins[0] + 75, self.screen.get_screen().get_height() - SM_BUTTON_STYLES['normal'].margins[1] - 30)
         self.backButton.move(SM_BUTTON_STYLES['normal'].margins[0] - 75, self.screen.get_screen().get_height() - SM_BUTTON_STYLES['normal'].margins[1]  - 30)
 
-
-        self.applyButton.at_unclick = self.applySettings                                                                                                                                                                    
+        self.applyButton.at_unclick = self.applySettings
         self.backButton.at_unclick = self.changeButtonState
         self.backButton.at_unclick_params = {"button": self.backButton}
 
-
-        self.settingsElements = [self.applyButton, self.backButton, self.audioGroup, self.fullscreenCheckbox, self.resolutionDD, self.resolutionText]
+        self.settingsElements = [self.applyButton, self.backButton, self.audioGroup, self.fullscreenCheckbox, self.FullscreenText, self.resolutionText, self.resolutionDD]
         self.settingsMenu = Menu(self.screen, const.PATHS['Backgrounds']['settingsMenu'])
-        
+
         self.CharSelectorButtons = []
-        for keys, values in const.PATHS['Characters']['CharactersPreview'].items():
-            self.CharSelectorButtons.append(tp.TextAndImageButton(text=keys, img=scale(load(values), (32, 32)), mode="v"))
-        
+        for keys, values in CHARACTERS.items():
+            self.CharSelectorButtons.append(tp.TextAndImageButton(text=keys, img=scale(load(values['characterPreview']), (32, 32)), mode="v", styleNormal=SM_BUTTON_STYLES['normal'], styleHover=SM_BUTTON_STYLES['hover'], stylePressed=SM_BUTTON_STYLES['pressed'], text_style=IMG_BUTTON_TEXT_STYLE))
+
         for i in self.CharSelectorButtons:
             i.at_unclick = self.changeButtonState
             i.at_unclick_params = {"button": i}
             for j in i.children:
                 j.default_at_unclick = self.do_nothing
-        
+
         self.CharSelectorButtonsG = tp.Group(self.CharSelectorButtons, gap=20, mode="h")
         self.CharSelectorButtonsGupd = self.CharSelectorButtonsG.get_updater(self.fps)
         self.backButtonupd = self.backButton.get_updater(self.fps)
-        
+
         self.settingsElementsupd = [i.get_updater(self.fps) for i in self.settingsElements]
         self.buttonGroupupd = self.buttonGroup.get_updater(self.fps)
         self.CharSelectorMenu = Menu(self.screen, const.PATHS['Backgrounds']['CharSelector'])
-        pg.mixer.music.load(const.PATHS['Music']['settingsMenu'])
-        
-        
+
         self.MapSelectorButtons = []
         for keys, values in const.PATHS['Maps'].items():
-            self.MapSelectorButtons.append(tp.TextAndImageButton(text=keys, img=scale(load(values), (128, 128)), mode="h", margins=(10, 15), reverse=True))
-        
+            self.MapSelectorButtons.append(tp.TextAndImageButton(text=keys, img=scale(load(values), (128, 128)), mode="h", margins=(10, 15), reverse=True, styleNormal=SM_BUTTON_STYLES['normal'], styleHover=SM_BUTTON_STYLES['hover'], stylePressed=SM_BUTTON_STYLES['pressed'], text_style=IMG_BUTTON_TEXT_STYLE))
+
         for i in self.MapSelectorButtons:
             i.at_unclick = self.changeButtonState
             i.at_unclick_params = {"button": i}
             for j in i.children:
                 j.default_at_unclick = self.do_nothing
-                
+
         self.MapSelectorButtonsG = tp.Group(self.MapSelectorButtons, gap=20, mode="v")
         self.MapSelectorMenu = Menu(self.screen, const.PATHS['Backgrounds']['MapSelector'])
         self.MapSelectorButtonsGupd = self.MapSelectorButtonsG.get_updater(self.fps)
 
     def do_nothing(self):
         pass
-    
+
     def runCurrent(self, menu: Menu, buttonGroup: list[tp.Group] | list[tp.elements.Element]):
         menu.running = True
         while menu.running:
             menu.bg.blitStatic()
-            
+
             for i in buttonGroup:
                 i.update()
-                
+
             if menu == self.menu:
                 if self.playButton.state == "unclicked":
                     return ["Play", True]
-                
+
                 if self.settingsButton.state == "unclicked":
                     return ["Settings", True]
-                
+
                 if self.quitButton.state == "unclicked":
                     return ["Quit", True]
-            
-            
+
             if menu == self.settingsMenu or menu == self.CharSelectorMenu or menu == self.MapSelectorMenu:
                 if self.backButton.state == "unclicked":
                     return ["Back", True]
-            
+
             if menu == self.CharSelectorMenu:
                 for i in self.CharSelectorButtons:
                     if i.state == "unclicked":
                         return [i.children[0].text, True]
-            
+
             if menu == self.MapSelectorMenu:
                 for i in self.MapSelectorButtons:
                     if i.state == "unclicked":
                         return [i.children[1].text, True]
-            
+
             if pg.event.poll().type == pg.QUIT:
                 menu.running = False
                 return ["Quit", False]
-                    
-                    
+
             pg.display.update()
             self.clock.tick(self.fps)
-
 
     def switchToSettings(self):
         self.menu.running = False
@@ -171,7 +164,6 @@ class MainMenu:
         pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
         self.buildMenu("settings")
         self.runCurrent(self.settingsMenu, [self.applyButton, self.backButton])
-
 
     def changeMenu(self, From: str, To: str):
         if From == "main" and To == "settings":
@@ -187,7 +179,7 @@ class MainMenu:
             self.backButton.set_invisible(True, True)
             self.buttonGroup.set_invisible(False, True)
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
-        
+
         if From == "main" and To == "CharSelector":
             self.screen.set_caption("GitSurvivors: Character Selector")
             self.buttonGroup.set_invisible(True, True)
@@ -216,10 +208,16 @@ class MainMenu:
             self.backButton.set_invisible(False, True)
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
 
+        if From == "Game" and To == "main":
+            self.screen.set_caption("GitSurvivors: Main Menu")
+            self.buttonGroup.set_invisible(False, True)
+            self.CharSelectorButtonsG.set_invisible(True, True)
+            self.MapSelectorButtonsG.set_invisible(True, True)
+            self.backButton.set_invisible(True, True)
+            pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
 
     def changeButtonState(self, button: tp.elements.Element):
         button.state = "unclicked"
-
 
     def applySettings(self):
         if self.resolutionDD.get_value() != None:
@@ -240,7 +238,6 @@ class MainMenu:
         self.backButton.set_invisible(True, True)
         self.buttonGroup.set_invisible(False, True)
         self.runCurrent(self.menu, [self.buttonGroup])
-
 
     def quitGame(self):
         event = pg.event.Event(pg.QUIT)
