@@ -1,6 +1,6 @@
 <div align="center">
     <h1>
-    GitSurvivors
+    VampyGame
     </h1>
 
 ![Static Badge](https://badgen.net/badge/icon/windows?icon=windows&label)
@@ -8,12 +8,12 @@
 ![Static Badge](https://badgen.net/badge/Pygame/2.6.1/blue)
 ![Static Badge](https://badgen.net/badge/Thorpy/2.1.11/blue)
 
-![Static Badge](https://badgen.net/github/last-commit/Brain4ess/GitSurvivors)
+![Static Badge](https://badgen.net/github/last-commit/Brain4ess/VampyGame)
 
 </div>
 
 ## About
-> GitSurvivors is a `Vampire Survivors`-like game made for a college project. It is a 2D game where the player controls a character and fights enemies while collecting abilities to survive as long as possible.
+> VampyGame is a `Vampire Survivors`-like game made for a college project. It is a 2D game where the player controls a character and fights enemies while collecting abilities to survive as long as possible.
 
 
 ## Installation

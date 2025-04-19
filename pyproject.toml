@@ -1,5 +1,5 @@
 [project]
-name = "GitSurvivors"
+name = "VampyGame"
 version = "0.1.0"
 description = "2D game where the player controls a character and fights enemies while collecting abilities to survive as long as possible."
 readme = "README.md"

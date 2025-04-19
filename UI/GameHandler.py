@@ -15,7 +15,7 @@ class GameHandler:
         self.ui = ui
         self.mainMenu = mm.MainMenu(self.screen)
         self.running = True
-        self.screen.set_caption("GitSurvivors: Main Menu")
+        self.screen.set_caption("VampyGame: Main Menu")
         pg.mixer.music.load(PATHS['Music']['Menu'])
         pg.mixer.music.set_volume(cfg.getint("Settings", "musicvolume") / 100)
         pg.mixer.music.play(-1)
@@ -45,7 +45,7 @@ class GameHandler:
                         if Mreturned[0] != "QUIT" and Mreturned[0] != "Back":
                             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_WAIT)
                             self.mainMenu.changeMenu("MapSelector", "Game")
-                            self.screen.set_caption("GitSurvivors")
+                            self.screen.set_caption("VampyGame")
                             pg.mixer.music.stop()
                             self.game = Game(self.screen.get_screen(), PATHS['Maps'][Mreturned[0]], Creturned[0], self.ui)
                             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)

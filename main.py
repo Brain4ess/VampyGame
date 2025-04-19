@@ -25,7 +25,7 @@ if not cfg.has_section('Settings'):
 pg.init()
 
 if __name__ == "__main__":
-    screen = GameScreen((cfg.getint('Settings', 'Width'), cfg.getint('Settings', 'Height')), "GitSurvivors", fullscreen=cfg.getboolean('Settings', 'Fullscreen'))
+    screen = GameScreen((cfg.getint('Settings', 'Width'), cfg.getint('Settings', 'Height')), "VampyGame", fullscreen=cfg.getboolean('Settings', 'Fullscreen'))
     tp.init(screen.get_screen(), tp.theme_human)
     ui = initui(screen.get_screen())
 

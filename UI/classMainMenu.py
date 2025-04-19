@@ -167,49 +167,49 @@ class MainMenu:
 
     def changeMenu(self, From: str, To: str):
         if From == "main" and To == "settings":
-            self.screen.set_caption("GitSurvivors: Settings")
+            self.screen.set_caption("VampyGame: Settings")
             self.buttonGroup.set_invisible(True, True)
             self.applyButton.set_invisible(False, True)
             self.backButton.set_invisible(False, True)
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
 
         if From == "settings" and To == "main":
-            self.screen.set_caption("GitSurvivors: Main Menu")
+            self.screen.set_caption("VampyGame: Main Menu")
             self.applyButton.set_invisible(True, True)
             self.backButton.set_invisible(True, True)
             self.buttonGroup.set_invisible(False, True)
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
 
         if From == "main" and To == "CharSelector":
-            self.screen.set_caption("GitSurvivors: Character Selector")
+            self.screen.set_caption("VampyGame: Character Selector")
             self.buttonGroup.set_invisible(True, True)
             self.CharSelectorButtonsG.set_invisible(False, True)
             self.backButton.set_invisible(False, True)
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
 
         if From == "CharSelector" and To == "main":
-            self.screen.set_caption("GitSurvivors: Main Menu")
+            self.screen.set_caption("VampyGame: Main Menu")
             self.buttonGroup.set_invisible(False, True)
             self.CharSelectorButtonsG.set_invisible(True, True)
             self.backButton.set_invisible(True, True)
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
 
         if From == "CharSelector" and To == "MapSelector":
-            self.screen.set_caption("GitSurvivors: Map Selector")
+            self.screen.set_caption("VampyGame: Map Selector")
             self.CharSelectorButtonsG.set_invisible(True, True)
             self.MapSelectorButtonsG.set_invisible(False, True)
             self.backButton.set_invisible(False, True)
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
 
         if From == "MapSelector" and To == "CharSelector":
-            self.screen.set_caption("GitSurvivors: Character Selector")
+            self.screen.set_caption("VampyGame: Character Selector")
             self.MapSelectorButtonsG.set_invisible(True, True)
             self.CharSelectorButtonsG.set_invisible(False, True)
             self.backButton.set_invisible(False, True)
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
 
         if From == "Game" and To == "main":
-            self.screen.set_caption("GitSurvivors: Main Menu")
+            self.screen.set_caption("VampyGame: Main Menu")
             self.buttonGroup.set_invisible(False, True)
             self.CharSelectorButtonsG.set_invisible(True, True)
             self.MapSelectorButtonsG.set_invisible(True, True)
