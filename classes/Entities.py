@@ -1,9 +1,11 @@
-import pygame as pg
-from math import sqrt
-import random
-from os import listdir
 import configparser as cfgp
 import datetime as dt
+import random
+from math import sqrt
+from os import listdir
+
+import pygame as pg
+
 
 class Enemy(pg.sprite.Sprite):
     def __init__(self, screen: pg.Surface, enemy: dict, player, camera, group: pg.sprite.Group, enemy_group:pg.sprite.Group):

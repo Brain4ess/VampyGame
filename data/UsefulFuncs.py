@@ -1,6 +1,7 @@
 import configparser as cfgp
-import pygame as pg
 import os
+
+import pygame as pg
 
 cfg = cfg = cfgp.ConfigParser()
 cfg.read('data/config.ini')

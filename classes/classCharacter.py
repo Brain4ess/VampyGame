@@ -10,6 +10,7 @@ import classes.classAbility as clab
 import data.Abilities as ab
 from data.Characters import CHARACTERS
 
+
 class Character(Sprite):
     def __init__(self, bg, character: str, screen: pg.Surface = None, speed: int = 0, group: pg.sprite.Group = None, enemy_group: pg.sprite.Group = None, timer = None):
         super().__init__()

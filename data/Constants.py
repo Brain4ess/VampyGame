@@ -14,7 +14,10 @@ PATHS: dict = {
     
     
     'Maps': {
-        'mapPlaceholder': 'assets/images/placeholders/maps/BigMapPlaceholderCenterDot.png'
+        'Placeholder': 'assets/images/maps/BigMapPlaceholderCenterDot.png',
+        'Plains': 'assets/images/maps/Plains.png',
+        'Fantasy Plains': 'assets/images/maps/FantasyPlains.png',
+        'Dark Plains': 'assets/images/maps/DarkPlains.png',
     },
     
     

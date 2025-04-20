@@ -1,9 +1,11 @@
 import pygame as pg
 import thorpy as tp
+
 import data.Constants as const
-from data.Characters import CHARACTERS
 from classes.classCharacter import Character
-from data.GuiData import MM_BUTTON_STYLES, IMG_BUTTON_TEXT_STYLE
+from data.Characters import CHARACTERS
+from data.GuiData import IMG_BUTTON_TEXT_STYLE, MM_BUTTON_STYLES
+
 
 class initui:
     def __init__(self, screen: pg.Surface):

@@ -1,11 +1,13 @@
-import pygame as pg
-from classes.Entities import Enemy
-from classes.classCharacter import Character
-from classes.classCamera import Camera
 import datetime as dt
-from classes.classTimer import Timer
-from data.Enemies import ENEMIES
 import random
+
+import pygame as pg
+
+from classes.classCamera import Camera
+from classes.classCharacter import Character
+from classes.classTimer import Timer
+from classes.Entities import Enemy
+from data.Enemies import ENEMIES
 
 
 class EnemyHandler:

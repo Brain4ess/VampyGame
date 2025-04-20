@@ -1,7 +1,8 @@
 import pygame as pg
-from pygame.locals import *
 from pygame.image import load
+from pygame.locals import *
 from pygame.transform import scale
+
 
 class BG: 
     def __init__(self, mapImage: str, screen: pg.Surface, speed: int = 0, spawnpoint: pg.math.Vector2 = pg.math.Vector2(0,0), fill = False):

@@ -1,13 +1,16 @@
+import configparser as cfgp
+
 import pygame as pg
-from UI.classGameScreen import GameScreen
-from classes.classBackground import BG
+import thorpy as tp
 from pygame.image import load
 from pygame.transform import scale
-import configparser as cfgp
+
 import data.Constants as const
+from classes.classBackground import BG
 from data.Characters import CHARACTERS
-import thorpy as tp
-from data.GuiData import MM_BUTTON_STYLES, SM_BUTTON_STYLES, IMG_BUTTON_TEXT_STYLE
+from data.GuiData import (IMG_BUTTON_TEXT_STYLE, MM_BUTTON_STYLES,
+                          SM_BUTTON_STYLES)
+from UI.classGameScreen import GameScreen
 
 cfg = cfgp.ConfigParser()
 cfg.read('data/config.ini')

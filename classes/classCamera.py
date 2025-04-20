@@ -1,5 +1,7 @@
 import pygame as pg
+
 from classes.classCharacter import Character
+
 
 class Camera:
     def __init__(self, screen: pg.Surface, width, height, bg):

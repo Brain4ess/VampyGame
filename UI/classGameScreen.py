@@ -1,7 +1,9 @@
-import pygame as pg
-from pygame.display import set_mode, set_caption, set_icon
-from pygame.image import load
 from dataclasses import dataclass
+
+import pygame as pg
+from pygame.display import set_caption, set_icon, set_mode
+from pygame.image import load
+
 
 @dataclass
 class GameScreen(pg.Surface):

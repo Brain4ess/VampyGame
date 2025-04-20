@@ -1,3 +1,4 @@
+import configparser as cfgp
 from random import choice
 
 import pygame as pg
@@ -12,7 +13,6 @@ from classes.EnemyHandler import EnemyHandler
 from data.Abilities import ABILITIES, PASSIVES
 from UI.classGameScreen import GameScreen
 from UI.GameUI import UI
-import configparser as cfgp
 
 cfg = cfgp.ConfigParser()
 cfg.read('data/config.ini')

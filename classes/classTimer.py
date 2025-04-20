@@ -1,5 +1,7 @@
-import pygame as pg
 import datetime
+
+import pygame as pg
+
 
 class Timer:
     def __init__(self, screen: pg.Surface, font, color, size):
