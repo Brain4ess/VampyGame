@@ -279,7 +279,7 @@ class Starfall(Ability):
                 self.damaged = True
                 
 
-            if (self.timer.time - self.lastfired).seconds >= self.cooldown - ((self.level - 1) / 1.45) and self.enemy_group:
+            if (self.timer.time - self.lastfired).seconds >= self.cooldown - ((self.level - 1) / 1.45) and self.enemy_group and int(self.currsprite) >= len(self.right_sprites) - 1:
                     self.lastfired = self.timer.time
                     self.currsprite = 0
                     self.damaged = False
