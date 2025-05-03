@@ -6,7 +6,7 @@ from pygame.locals import *
 from pygame.sprite import Sprite
 from pygame.transform import flip, scale_by
 
-import classes.classAbility as clab
+from classes import Abilities as clab
 import data.Abilities as ab
 from data.Characters import CHARACTERS
 

@@ -33,35 +33,35 @@ class GameHandler:
                 pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
                 self.mainMenu.changeMenu("main", "CharSelector")
                 while True:
-                    Creturned = self.mainMenu.runCurrent(self.mainMenu.CharSelectorMenu, [self.mainMenu.CharSelectorButtonsGupd, self.mainMenu.backButtonupd])
-                    if Creturned[0] == "Back":
+                    CharacterSelectorOption = self.mainMenu.runCurrent(self.mainMenu.CharSelectorMenu, [self.mainMenu.CharSelectorButtonsGupd, self.mainMenu.backButtonupd])
+                    if CharacterSelectorOption[0] == "Back":
                         self.mainMenu.changeMenu("CharSelector", "main")
                         break
-                    if Creturned[0] != "QUIT" and Creturned[0] != "Back":
+                    if CharacterSelectorOption[0] != "QUIT" and CharacterSelectorOption[0] != "Back":
                         self.mainMenu.changeMenu("CharSelector", "MapSelector")
-                        Mreturned = self.mainMenu.runCurrent(self.mainMenu.MapSelectorMenu, [self.mainMenu.MapSelectorButtonsGupd, self.mainMenu.backButtonupd])
-                        if Mreturned[0] == "Back":
+                        MapSelectorOption = self.mainMenu.runCurrent(self.mainMenu.MapSelectorMenu, [self.mainMenu.MapSelectorButtonsGupd, self.mainMenu.backButtonupd])
+                        if MapSelectorOption[0] == "Back":
                             self.mainMenu.changeMenu("MapSelector", "CharSelector")
                             continue
 
-                        if Mreturned[0] != "QUIT" and Mreturned[0] != "Back":
+                        if MapSelectorOption[0] != "QUIT" and MapSelectorOption[0] != "Back":
                             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_WAIT)
                             self.mainMenu.changeMenu("MapSelector", "Game")
                             self.screen.set_caption("VampyGame")
                             pg.mixer.music.stop()
-                            self.game = Game(self.screen.get_screen(), PATHS['Maps'][Mreturned[0]], Creturned[0], self.ui)
+                            self.game = Game(self.screen.get_screen(), PATHS['Maps'][MapSelectorOption[0]], CharacterSelectorOption[0], self.ui)
                             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
-                            Greturned = self.game.runGame()
-                            if Greturned == "QUIT":
+                            GameReturned = self.game.runGame()
+                            if GameReturned == "QUIT":
                                 break
-                            if Greturned == "ToMenu":
+                            if GameReturned == "ToMenu":
                                 del self.game
                                 break
-                if Creturned[0] == "Back":
+                if CharacterSelectorOption[0] == "Back":
                     continue
-                if Greturned == "QUIT":
+                if GameReturned == "QUIT":
                     break
-                if Greturned == "ToMenu":
+                if GameReturned == "ToMenu":
 
                     self.mainMenu.changeMenu("Game", "main")
                     pg.mixer.music.load(PATHS['Music']['Menu'])
