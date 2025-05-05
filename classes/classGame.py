@@ -74,63 +74,9 @@ class Game:
             self.player.update(self.camera.getoffset())
 
             # Death mechanic
-            if self.player.hp <= 0:
-                self.ui.resume.set_text(f'Revive (left: {self.player.lives})')
-                self.timer.pause(True)
-                while True:
-                    self.eventGame()
-                    self.ui.update_Pause()
-                    if self.ui.resume.state == "unclicked":
-                        if self.player.lives > 0:
-                            self.player.hp = self.player.maxhp
-                            self.player.lives -= 1
-                            self.timer.pause(False)
-                            break
-                    if self.ui.exit_to_menu.state == "unclicked":
-                        self.ui.resume.at_unclick = None
-                        self.attempt_suicide()
-                        return "ToMenu"
-                    if self.ui.quit.state == "unclicked":
-                        return "QUIT"
-                    if not self.run:
-                        return "QUIT"
-                    pg.display.update()
-                    self.clock.tick(self.fps)
+            self.deathScreenLoop()
 
-            if self.player.lvl > self.__prev_Plevel:
-                self.__prev_Plevel = self.player.lvl
-                self.make_upgrades()
-                if len(self.abilities_final) > 0:
-                    self.chosen = False
-                    self.timer.pause(not self.chosen)
-                    while not self.chosen:
-                        self.eventGame()
-                        self.ui.update_Upgrade()
-                        for i in range(len(self.ui.UpgButtons.children)):
-                            if self.ui.UpgButtons.children[i].state == "unclicked":
-                                if '[•]' in self.ui.UpgButtons.children[i].children[1].text:
-                                    if self.player.get_passive(self.abilities_final[i]) != None:
-                                        self.player.get_passive(self.abilities_final[i]).onlevelup()
-                                    else:
-                                        self.player.add_passive(self.abilities_final[i])
-                                        if len(self.player.passives) > 1:
-                                            for i in range(len(self.player.passives) - 1):
-                                                self.player.passives[i].onPassiveAdd(self.player.passives[-1])
-                                else:
-                                    if self.player.get_ability(self.abilities_final[i]) != None:
-                                        self.player.get_ability(self.abilities_final[i]).level += 1
-                                    else:
-                                        self.player.add_ability(self.abilities_final[i])
-                                        if len(self.player.passives) > 0:
-                                            for i in range(len(self.player.passives)):
-                                                self.player.passives[i].onAbilityAdd(self.player.abilities[-1])
-                                self.chosen = True
-                                self.timer.pause(not self.chosen)
-                                break
-                        if not self.run:
-                            return "QUIT"
-                        pg.display.update()
-                        self.clock.tick(self.fps)
+            self.levelUpLoop()
 
             self.ui.update()
             self.camera.update(self.player)
@@ -140,18 +86,7 @@ class Game:
             self.clock.tick(self.fps)
 
             while self.paused:
-                self.eventGame()
-                self.ui.update_Pause()
-                if self.ui.exit_to_menu.state == "unclicked":
-                    self.ui.resume.at_unclick = None
-                    self.attempt_suicide()
-                    return "ToMenu"
-                if self.ui.quit.state == "unclicked":
-                    return "QUIT"
-                if not self.run:
-                    return "QUIT"
-                pg.display.update()
-                self.clock.tick(self.fps)
+                self.pauseLoop()
 
     def make_upgrades(self):
         upg_abilities = []
@@ -219,6 +154,79 @@ class Game:
                 for i in range(len(self.abilities_final), len(self.ui.UpgButtons.children)):
                     self.ui.UpgButtons.children[i].set_invisible(True, True)
 
+    def pauseLoop(self):
+        self.eventGame()
+        self.ui.update_Pause()
+        if self.ui.exit_to_menu.state == "unclicked":
+            self.ui.resume.at_unclick = None
+            self.attempt_suicide()
+            return "ToMenu"
+        if self.ui.quit.state == "unclicked":
+            return "QUIT"
+        if not self.run:
+            return "QUIT"
+        pg.display.update()
+        self.clock.tick(self.fps)
+
+    def deathScreenLoop(self):
+        if self.player.hp <= 0:
+                self.ui.resume.set_text(f'Revive (left: {self.player.lives})')
+                self.timer.pause(True)
+                while True:
+                    self.eventGame()
+                    self.ui.update_Pause()
+                    if self.ui.resume.state == "unclicked":
+                        if self.player.lives > 0:
+                            self.player.hp = self.player.maxhp
+                            self.player.lives -= 1
+                            self.timer.pause(False)
+                            break
+                    if self.ui.exit_to_menu.state == "unclicked":
+                        self.ui.resume.at_unclick = None
+                        self.attempt_suicide()
+                        return "ToMenu"
+                    if self.ui.quit.state == "unclicked":
+                        return "QUIT"
+                    if not self.run:
+                        return "QUIT"
+                    pg.display.update()
+                    self.clock.tick(self.fps)
+
+    def levelUpLoop(self):
+        if self.player.lvl > self.__prev_Plevel:
+            self.__prev_Plevel = self.player.lvl
+            self.make_upgrades()
+            if len(self.abilities_final) > 0:
+                self.chosen = False
+                self.timer.pause(not self.chosen)
+                while not self.chosen:
+                    self.eventGame()
+                    self.ui.update_Upgrade()
+                    for i in range(len(self.ui.UpgButtons.children)):
+                        if self.ui.UpgButtons.children[i].state == "unclicked":
+                            if '[•]' in self.ui.UpgButtons.children[i].children[1].text:
+                                if self.player.get_passive(self.abilities_final[i]) != None:
+                                    self.player.get_passive(self.abilities_final[i]).onlevelup()
+                                else:
+                                    self.player.add_passive(self.abilities_final[i])
+                                    if len(self.player.passives) > 1:
+                                        for i in range(len(self.player.passives) - 1):
+                                            self.player.passives[i].onPassiveAdd(self.player.passives[-1])
+                            else:
+                                if self.player.get_ability(self.abilities_final[i]) != None:
+                                    self.player.get_ability(self.abilities_final[i]).level += 1
+                                else:
+                                    self.player.add_ability(self.abilities_final[i])
+                                    if len(self.player.passives) > 0:
+                                        for i in range(len(self.player.passives)):
+                                            self.player.passives[i].onAbilityAdd(self.player.abilities[-1])
+                            self.chosen = True
+                            self.timer.pause(not self.chosen)
+                            break
+                    if not self.run:
+                        return "QUIT"
+                    pg.display.update()
+                    self.clock.tick(self.fps)
     def attempt_suicide(self):
         del self.bg.bg
         del self.bg.mapImage
