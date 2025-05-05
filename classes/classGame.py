@@ -74,9 +74,14 @@ class Game:
             self.player.update(self.camera.getoffset())
 
             # Death mechanic
-            self.deathScreenLoop()
+            deathScreen = self.deathScreenLoop()
+            if deathScreen != True:
+                return deathScreen
 
-            self.levelUpLoop()
+            levelUpLoop = self.levelUpLoop()
+            if levelUpLoop != True:
+                return levelUpLoop
+            
 
             self.ui.update()
             self.camera.update(self.player)
@@ -86,7 +91,9 @@ class Game:
             self.clock.tick(self.fps)
 
             while self.paused:
-                self.pauseLoop()
+                pauseLoop = self.pauseLoop()
+                if pauseLoop != True:
+                    return pauseLoop
 
     def make_upgrades(self):
         upg_abilities = []
@@ -167,6 +174,7 @@ class Game:
             return "QUIT"
         pg.display.update()
         self.clock.tick(self.fps)
+        return True
 
     def deathScreenLoop(self):
         if self.player.hp <= 0:
@@ -191,6 +199,7 @@ class Game:
                         return "QUIT"
                     pg.display.update()
                     self.clock.tick(self.fps)
+        return True
 
     def levelUpLoop(self):
         if self.player.lvl > self.__prev_Plevel:
@@ -227,6 +236,7 @@ class Game:
                         return "QUIT"
                     pg.display.update()
                     self.clock.tick(self.fps)
+        return True
     def attempt_suicide(self):
         del self.bg.bg
         del self.bg.mapImage
