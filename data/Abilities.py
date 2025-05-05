@@ -8,7 +8,7 @@ ABILITIES: dict = {
         'speed': 7,
         'class': 'Shuriken',
         'sound': None,
-        'damage': 7,
+        'damage': 70,
         'lifetime': 2,
         'cooldown': 2,
         'max_level': 5
@@ -53,7 +53,7 @@ ABILITIES: dict = {
         'speed': 7,
         'class': 'Starfall',
         'sound': None,
-        'damage': 10,
+        'damage': 100,
         'lifetime': 0,
         'cooldown': 5,
         'max_level': 5
