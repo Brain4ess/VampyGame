@@ -8,7 +8,7 @@ ABILITIES: dict = {
         'speed': 7,
         'class': 'Shuriken',
         'sound': None,
-        'damage': 70,
+        'damage': 7,
         'lifetime': 2,
         'cooldown': 2,
         'max_level': 5

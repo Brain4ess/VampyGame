@@ -261,10 +261,10 @@ class Game:
         del self.timer
         del self.camera
         del self.EnemyHandler
-        del self.ui.lvlbar
-        del self.ui.hpbar
-        del self.ui.hpbarupd
-        del self.ui.lvlbarupd
+        del self.ui.lvlBar
+        del self.ui.healthBar
+        del self.ui.healthBarUpdater
+        del self.ui.lvlBarUpdater
         del self.ui.resume
         del self.ui.exit_to_menu
         del self.ui.quit

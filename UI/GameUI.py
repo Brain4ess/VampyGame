@@ -10,25 +10,25 @@ from data.GuiData import IMG_BUTTON_TEXT_STYLE, MM_BUTTON_STYLES
 class initui:
     def __init__(self, screen: pg.Surface):
         self.screen = screen
-        self.hpbar = tp.Lifebar("", length=self.screen.get_width() / 10 * 2, height=30, bck_color=(37, 190, 106), initial_value=100 / 100, auto_adapt_length=False)
-        self.hpbar.set_locked(True)
-        self.hpbar.e_frame.set_bck_color(pg.color.Color(32, 32, 32))
-        self.hpbar.e_frame.set_style_attr("border_color", pg.color.Color(32, 32, 32))
-        self.hpbar.move(self.screen.get_width() / 2, self.screen.get_height() - 35)
-        self.hpbarupd = self.hpbar.get_updater(const.FPS)
+        self.healthBar = tp.Lifebar("", length=self.screen.get_width() / 10 * 2, height=30, bck_color=(37, 190, 106), initial_value=100 / 100, auto_adapt_length=False)
+        self.healthBar.set_locked(True)
+        self.healthBar.e_frame.set_bck_color(pg.color.Color(32, 32, 32))
+        self.healthBar.e_frame.set_style_attr("border_color", pg.color.Color(32, 32, 32))
+        self.healthBar.move(self.screen.get_width() / 2, self.screen.get_height() - 35)
+        self.healthBarUpdater = self.healthBar.get_updater(const.FPS)
 
-        self.lvlbar = tp.Lifebar(f"Lv. 0", length=self.screen.get_width() - 20, height=30, bck_color=(37, 150, 190), initial_value=0, auto_adapt_length=False, font_color="White")
-        self.lvlbar.set_locked(True)
-        self.lvlbar.e_frame.set_bck_color(pg.color.Color(32, 32, 32))
-        self.lvlbar.e_frame.set_style_attr("border_color", pg.color.Color(32, 32, 32))
-        self.lvlbar.move(self.screen.get_width() / 2, 10)
-        self.lvlbar.life_text.move((self.screen.get_width() / 2) - 40, 0)
-        self.lvlbarupd = self.lvlbar.get_updater(const.FPS)
+        self.lvlBar = tp.Lifebar(f"Lv. 0", length=self.screen.get_width() - 20, height=30, bck_color=(37, 150, 190), initial_value=0, auto_adapt_length=False, font_color="White")
+        self.lvlBar.set_locked(True)
+        self.lvlBar.e_frame.set_bck_color(pg.color.Color(32, 32, 32))
+        self.lvlBar.e_frame.set_style_attr("border_color", pg.color.Color(32, 32, 32))
+        self.lvlBar.move(self.screen.get_width() / 2, 10)
+        self.lvlBar.life_text.move((self.screen.get_width() / 2) - 40, 0)
+        self.lvlBarUpdater = self.lvlBar.get_updater(const.FPS)
 
         self.resume = tp.Button("Resume", MM_BUTTON_STYLES['normal'], MM_BUTTON_STYLES['hover'], MM_BUTTON_STYLES['pressed'])
         self.exit_to_menu = tp.Button("Exit to menu", MM_BUTTON_STYLES['normal'], MM_BUTTON_STYLES['hover'], MM_BUTTON_STYLES['pressed'])
         self.quit = tp.Button("Quit game", MM_BUTTON_STYLES['normal'], MM_BUTTON_STYLES['hover'], MM_BUTTON_STYLES['pressed'])
-        self.pauseMenuButtonUpd = tp.Group([self.resume, self.exit_to_menu, self.quit], gap=10).get_updater(const.FPS)
+        self.pauseMenuButtonUpdater = tp.Group([self.resume, self.exit_to_menu, self.quit], gap=10).get_updater(const.FPS)
         
         self.UpgButtons = tp.Group([], gap = 10)
         for i in range(6):
@@ -44,11 +44,11 @@ class UI:
         self.exit_to_menu = ui.exit_to_menu
         self.quit = ui.quit
         self.resume = ui.resume
-        self.hpbar = ui.hpbar
-        self.lvlbar = ui.lvlbar
-        self.hpbarupd = ui.hpbarupd
-        self.lvlbarupd = ui.lvlbarupd
-        self.pauseMenuButtonUpd = ui.pauseMenuButtonUpd
+        self.healthBar = ui.healthBar
+        self.lvlBar = ui.lvlBar
+        self.healthBarUpdater = ui.healthBarUpdater
+        self.lvlBarUpdater = ui.lvlBarUpdater
+        self.pauseMenuButtonUpdater = ui.pauseMenuButtonUpdater
         self.resume.at_unclick_params = {"button": self.resume}
         self.exit_to_menu.at_unclick = self.changeButtonState
         self.exit_to_menu.at_unclick_params = {"button": self.exit_to_menu}
@@ -62,14 +62,14 @@ class UI:
 
 
     def update(self):
-        self.hpbar.set_value(self.player.hp / self.player.maxhp)
-        self.hpbar.e_rect.set_bck_color(pg.color.Color.lerp(pg.color.Color(170, 35, 35), pg.color.Color(37, 190, 106), self.player.hp / self.player.maxhp))
+        self.healthBar.set_value(self.player.hp / self.player.maxhp)
+        self.healthBar.e_rect.set_bck_color(pg.color.Color.lerp(pg.color.Color(170, 35, 35), pg.color.Color(37, 190, 106), self.player.hp / self.player.maxhp))
         
-        self.lvlbar.set_value(self.player.exp / self.player.exp_next)
-        self.lvlbar.life_text.set_text(f"Lv. {self.player.lvl}")
+        self.lvlBar.set_value(self.player.exp / self.player.exp_next)
+        self.lvlBar.life_text.set_text(f"Lv. {self.player.lvl}")
         
-        self.hpbarupd.update()
-        self.lvlbarupd.update()
+        self.healthBarUpdater.update()
+        self.lvlBarUpdater.update()
 
 
     def changeButtonState(self, button: tp.elements.Element):
@@ -78,7 +78,7 @@ class UI:
 
 
     def update_Pause(self):
-        self.pauseMenuButtonUpd.update()
+        self.pauseMenuButtonUpdater.update()
 
 
     def update_Upgrade(self):
