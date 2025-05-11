@@ -31,17 +31,17 @@ class GameHandler:
 
             if returned[0] == "Play":
                 pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
-                self.mainMenu.changeMenu("main", "CharSelector")
+                self.mainMenu.changeMenu("main", "CharacterSelector")
                 while True:
-                    CharacterSelectorOption = self.mainMenu.runCurrent(self.mainMenu.CharSelectorMenu, [self.mainMenu.CharSelectorButtonsGupd, self.mainMenu.backButtonupd])
+                    CharacterSelectorOption = self.mainMenu.runCurrent(self.mainMenu.CharacterSelectorMenu, [self.mainMenu.CharacterSelectorButtonsGupd, self.mainMenu.backButtonupd])
                     if CharacterSelectorOption[0] == "Back":
-                        self.mainMenu.changeMenu("CharSelector", "main")
+                        self.mainMenu.changeMenu("CharacterSelector", "main")
                         break
                     if CharacterSelectorOption[0] != "QUIT" and CharacterSelectorOption[0] != "Back":
-                        self.mainMenu.changeMenu("CharSelector", "MapSelector")
+                        self.mainMenu.changeMenu("CharacterSelector", "MapSelector")
                         MapSelectorOption = self.mainMenu.runCurrent(self.mainMenu.MapSelectorMenu, [self.mainMenu.MapSelectorButtonsGupd, self.mainMenu.backButtonupd])
                         if MapSelectorOption[0] == "Back":
-                            self.mainMenu.changeMenu("MapSelector", "CharSelector")
+                            self.mainMenu.changeMenu("MapSelector", "CharacterSelector")
                             continue
 
                         if MapSelectorOption[0] != "QUIT" and MapSelectorOption[0] != "Back":

@@ -8,7 +8,7 @@ PATHS: dict = {
     'Backgrounds': {
         'mainMenu': 'assets/images/Background/MainMenu_Background.png',
         'settingsMenu': 'assets/images/Background/MainMenu_Background.png',
-        'CharSelector': 'assets/images/Background/MainMenu_Background.png',
+        'CharacterSelector': 'assets/images/Background/MainMenu_Background.png',
         'MapSelector': 'assets/images/Background/MainMenu_Background.png'
     },
     

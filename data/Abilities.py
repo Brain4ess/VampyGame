@@ -1,5 +1,12 @@
+# name: Code name of the ability
+# display_name: Display name of the ability
+# icon: Path to the icon of the ability that appears in the upgrade menu
+# sprite: Path to the sprites of the ability that appears in the game
+# sound: Path to the sound of the ability (It sounds when the ability hits the enemy)
 
 ABILITIES: dict = {
+    
+    # Fires a shuriken that flies into a random enemy position
     "shuriken": {
         'name': 'shuriken',
         'display_name': 'Shuriken',
@@ -14,6 +21,7 @@ ABILITIES: dict = {
         'max_level': 5
     },
     
+    # Launches a homing shot that flies until it reaches its target (if the target is gone, it flies to the point where it died and then disappears)
     "homing shot": {
         'name': 'homing shot',
         'display_name': 'Homing Shot',
@@ -29,6 +37,7 @@ ABILITIES: dict = {
         'hp': 1
     },
     
+    # Unleashes a lightning strike that attacks multiple targets with a slight delay
     "lightning strike": {
         'name': 'lightning strike',
         'display_name': 'Lightning Strike',
@@ -45,6 +54,7 @@ ABILITIES: dict = {
         'max_enemies': 3
     },
     
+    # Starburst a specific enemy
     "starfall": {
         'name': 'starfall',
         'display_name': 'Starfall',
@@ -59,6 +69,7 @@ ABILITIES: dict = {
         'max_level': 5
     },
     
+    # Slash attack that pushes enemies around, also increases the number of slashes depending on the passive ability 'Duplicator' pumping
     "slash": {
         'name': 'slash',
         'display_name': 'Slash',
@@ -80,9 +91,9 @@ ABILITIES: dict = {
     }
 }
 
-
+# All passive abilities have '[•]' in their names
 PASSIVES: dict = {
-    'duplicator': {  # +1 proj every level to every ability a player has
+    'duplicator': {  # +1 to projectiles per level for each ability a player has
         'name': 'duplicator',
         'display_name': 'Duplicator [•]',
         'icon': 'assets/images/abilities/passives/duplicator/icon.png',
@@ -90,7 +101,7 @@ PASSIVES: dict = {
         'class': 'Duplicator'
     },
     
-    'overclock': {  # cooldown decreaser for all abilities
+    'overclock': {  # Reduces the cooldowns of all abilities
         'name': 'overclock',
         'display_name': 'Overclock [•]',
         'icon': 'assets/images/abilities/passives/overclock/icon.png',
@@ -98,7 +109,7 @@ PASSIVES: dict = {
         'class': 'Overclock'
     },
     
-    'mirror': { # clones (random?) active ability, maybe more rare to get this?
+    'mirror': { # Clones random active ability
         'name': 'mirror',
         'display_name': 'Mirror [•]',
         'icon': 'assets/images/abilities/passives/mirror/icon.png',
@@ -106,7 +117,7 @@ PASSIVES: dict = {
         'class': 'Mirror'
     },
     
-    'overlevel':{  # +1 to max_level to all abilities excluding self, rare passive
+    'overlevel':{  # +1 to max_level to all abilities except self and rare passives
         'name': 'overlevel',
         'display_name': 'Overlevel [•]',
         'icon': 'assets/images/abilities/passives/overlevel/icon.webp',
@@ -114,7 +125,7 @@ PASSIVES: dict = {
         'class': 'Overlevel'
     },
     
-    'moreExp': {  # gives more exp when killing enemies
+    'moreExp': {  # Gives you more experience from killing enemies
         'name': 'moreExp',
         'display_name': 'More Experience [•]',
         'icon': 'assets/images/abilities/passives/more experience/icon.png',
@@ -122,7 +133,7 @@ PASSIVES: dict = {
         'class': 'MoreExp'
     },
     
-    'cheese': {  # allows you to revive once after death
+    'cheese': {  # Allows you to respawn once after death
         'name': 'cheese',
         'display_name': 'Cheese [•]',
         'icon': 'assets/images/abilities/passives/cheese/icon.png',
