@@ -87,23 +87,23 @@ class MainMenu:
         self.settingsElements = [self.applyButton, self.backButton, self.audioGroup, self.fullscreenCheckbox, self.FullscreenText, self.resolutionText, self.resolutionDD]
         self.settingsMenu = Menu(self.screen, const.PATHS['Backgrounds']['settingsMenu'])
 
-        self.CharacterSelectorButtons = []
+        self.characterSelectorButtons = []
         for keys, values in CHARACTERS.items():
-            self.CharacterSelectorButtons.append(tp.TextAndImageButton(text=keys, img=scale(load(values['characterPreview']), (32, 32)), mode="v", styleNormal=SM_BUTTON_STYLES['normal'], styleHover=SM_BUTTON_STYLES['hover'], stylePressed=SM_BUTTON_STYLES['pressed'], text_style=IMG_BUTTON_TEXT_STYLE))
+            self.characterSelectorButtons.append(tp.TextAndImageButton(text=keys, img=scale(load(values['characterPreview']), (32, 32)), mode="v", styleNormal=SM_BUTTON_STYLES['normal'], styleHover=SM_BUTTON_STYLES['hover'], stylePressed=SM_BUTTON_STYLES['pressed'], text_style=IMG_BUTTON_TEXT_STYLE))
 
-        for i in self.CharacterSelectorButtons:
+        for i in self.characterSelectorButtons:
             i.at_unclick = self.changeButtonState
             i.at_unclick_params = {"button": i}
             for j in i.children:
                 j.default_at_unclick = self.do_nothing
 
-        self.CharacterSelectorButtonsG = tp.Group(self.CharacterSelectorButtons, gap=20, mode="h")
-        self.CharacterSelectorButtonsGupd = self.CharacterSelectorButtonsG.get_updater(self.fps)
+        self.characterSelectorButtonsG = tp.Group(self.characterSelectorButtons, gap=20, mode="h")
+        self.characterSelectorButtonsGupd = self.characterSelectorButtonsG.get_updater(self.fps)
         self.backButtonupd = self.backButton.get_updater(self.fps)
 
         self.settingsElementsupd = [i.get_updater(self.fps) for i in self.settingsElements]
         self.buttonGroupupd = self.buttonGroup.get_updater(self.fps)
-        self.CharacterSelectorMenu = Menu(self.screen, const.PATHS['Backgrounds']['CharacterSelector'])
+        self.characterSelectorMenu = Menu(self.screen, const.PATHS['Backgrounds']['CharacterSelector'])
 
         self.MapSelectorButtons = []
         for keys, values in const.PATHS['Maps'].items():
@@ -140,12 +140,12 @@ class MainMenu:
                 if self.quitButton.state == "unclicked":
                     return ["Quit", True]
 
-            if menu == self.settingsMenu or menu == self.CharacterSelectorMenu or menu == self.MapSelectorMenu:
+            if menu == self.settingsMenu or menu == self.characterSelectorMenu or menu == self.MapSelectorMenu:
                 if self.backButton.state == "unclicked":
                     return ["Back", True]
 
-            if menu == self.CharacterSelectorMenu:
-                for i in self.CharacterSelectorButtons:
+            if menu == self.characterSelectorMenu:
+                for i in self.characterSelectorButtons:
                     if i.state == "unclicked":
                         return [i.children[0].text, True]
 
@@ -184,37 +184,37 @@ class MainMenu:
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
 
         if From == "main" and To == "CharacterSelector":
-            self.screen.set_caption("VampyGame: Character Select")
+            self.screen.set_caption("VampyGame: Character Selector")
             self.buttonGroup.set_invisible(True, True)
-            self.CharacterSelectorButtonsG.set_invisible(False, True)
+            self.characterSelectorButtonsG.set_invisible(False, True)
             self.backButton.set_invisible(False, True)
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
 
         if From == "CharacterSelector" and To == "main":
             self.screen.set_caption("VampyGame: Main Menu")
             self.buttonGroup.set_invisible(False, True)
-            self.CharacterSelectorButtonsG.set_invisible(True, True)
+            self.characterSelectorButtonsG.set_invisible(True, True)
             self.backButton.set_invisible(True, True)
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
 
         if From == "CharacterSelector" and To == "MapSelector":
             self.screen.set_caption("VampyGame: Map Selector")
-            self.CharacterSelectorButtonsG.set_invisible(True, True)
+            self.characterSelectorButtonsG.set_invisible(True, True)
             self.MapSelectorButtonsG.set_invisible(False, True)
             self.backButton.set_invisible(False, True)
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
 
         if From == "MapSelector" and To == "CharacterSelector":
-            self.screen.set_caption("VampyGame: Character Select")
+            self.screen.set_caption("VampyGame: Character Selector")
             self.MapSelectorButtonsG.set_invisible(True, True)
-            self.CharacterSelectorButtonsG.set_invisible(False, True)
+            self.characterSelectorButtonsG.set_invisible(False, True)
             self.backButton.set_invisible(False, True)
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
 
         if From == "Game" and To == "main":
             self.screen.set_caption("VampyGame: Main Menu")
             self.buttonGroup.set_invisible(False, True)
-            self.CharacterSelectorButtonsG.set_invisible(True, True)
+            self.characterSelectorButtonsG.set_invisible(True, True)
             self.MapSelectorButtonsG.set_invisible(True, True)
             self.backButton.set_invisible(True, True)
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)

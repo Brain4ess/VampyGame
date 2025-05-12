@@ -93,7 +93,9 @@ ABILITIES: dict = {
 
 # All passive abilities have '[•]' in their names
 PASSIVES: dict = {
-    'duplicator': {  # +1 to projectiles per level for each ability a player has
+    
+    # +1 to projectiles per level for each ability a player has
+    'duplicator': {
         'name': 'duplicator',
         'display_name': 'Duplicator [•]',
         'icon': 'assets/images/abilities/passives/duplicator/icon.png',
@@ -101,7 +103,8 @@ PASSIVES: dict = {
         'class': 'Duplicator'
     },
     
-    'overclock': {  # Reduces the cooldowns of all abilities
+    # Reduces the cooldowns of all abilities
+    'overclock': {
         'name': 'overclock',
         'display_name': 'Overclock [•]',
         'icon': 'assets/images/abilities/passives/overclock/icon.png',
@@ -109,7 +112,8 @@ PASSIVES: dict = {
         'class': 'Overclock'
     },
     
-    'mirror': { # Clones random active ability
+    # Clones random active ability
+    'mirror': {
         'name': 'mirror',
         'display_name': 'Mirror [•]',
         'icon': 'assets/images/abilities/passives/mirror/icon.png',
@@ -117,7 +121,8 @@ PASSIVES: dict = {
         'class': 'Mirror'
     },
     
-    'overlevel':{  # +1 to max_level to all abilities except self and rare passives
+    # +1 to max_level to all abilities except self and rare passives
+    'overlevel':{
         'name': 'overlevel',
         'display_name': 'Overlevel [•]',
         'icon': 'assets/images/abilities/passives/overlevel/icon.webp',
@@ -125,7 +130,8 @@ PASSIVES: dict = {
         'class': 'Overlevel'
     },
     
-    'moreExp': {  # Gives you more experience from killing enemies
+    # Gives you more experience from killing enemies
+    'moreExp': {
         'name': 'moreExp',
         'display_name': 'More Experience [•]',
         'icon': 'assets/images/abilities/passives/more experience/icon.png',
@@ -133,7 +139,8 @@ PASSIVES: dict = {
         'class': 'MoreExp'
     },
     
-    'cheese': {  # Allows you to respawn once after death
+    # Allows you to respawn once after death
+    'cheese': {
         'name': 'cheese',
         'display_name': 'Cheese [•]',
         'icon': 'assets/images/abilities/passives/cheese/icon.png',

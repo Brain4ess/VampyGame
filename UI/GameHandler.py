@@ -33,11 +33,11 @@ class GameHandler:
                 pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
                 self.mainMenu.changeMenu("main", "CharacterSelector")
                 while True:
-                    CharacterSelectorOption = self.mainMenu.runCurrent(self.mainMenu.CharacterSelectorMenu, [self.mainMenu.CharacterSelectorButtonsGupd, self.mainMenu.backButtonupd])
-                    if CharacterSelectorOption[0] == "Back":
+                    characterSelectorOption = self.mainMenu.runCurrent(self.mainMenu.characterSelectorMenu, [self.mainMenu.characterSelectorButtonsGupd, self.mainMenu.backButtonupd])
+                    if characterSelectorOption[0] == "Back":
                         self.mainMenu.changeMenu("CharacterSelector", "main")
                         break
-                    if CharacterSelectorOption[0] != "QUIT" and CharacterSelectorOption[0] != "Back":
+                    if characterSelectorOption[0] != "QUIT" and characterSelectorOption[0] != "Back":
                         self.mainMenu.changeMenu("CharacterSelector", "MapSelector")
                         MapSelectorOption = self.mainMenu.runCurrent(self.mainMenu.MapSelectorMenu, [self.mainMenu.MapSelectorButtonsGupd, self.mainMenu.backButtonupd])
                         if MapSelectorOption[0] == "Back":
@@ -49,7 +49,7 @@ class GameHandler:
                             self.mainMenu.changeMenu("MapSelector", "Game")
                             self.screen.set_caption("VampyGame")
                             pg.mixer.music.stop()
-                            self.game = Game(self.screen.get_screen(), PATHS['Maps'][MapSelectorOption[0]], CharacterSelectorOption[0], self.ui)
+                            self.game = Game(self.screen.get_screen(), PATHS['Maps'][MapSelectorOption[0]], characterSelectorOption[0], self.ui)
                             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
                             GameReturned = self.game.runGame()
                             if GameReturned == "QUIT":
@@ -57,7 +57,7 @@ class GameHandler:
                             if GameReturned == "ToMenu":
                                 del self.game
                                 break
-                if CharacterSelectorOption[0] == "Back":
+                if characterSelectorOption[0] == "Back":
                     continue
                 if GameReturned == "QUIT":
                     break

@@ -1,6 +1,9 @@
-from ..classPassive import Passive
 from random import choice
 
+from ..classPassive import Passive
+
+
+# Clones random active ability
 class Mirror(Passive): 
     def __post__init__(self):
         cloning = choice(self.player.abilities)

@@ -1,9 +1,14 @@
-from ..classAbility import Ability
-import pygame as pg
-from data.Constants import FPS
-from classes.Entities import Projectile
 from random import choice
 
+import pygame as pg
+
+from classes.Entities import Projectile
+from data.Constants import FPS
+
+from ..classAbility import Ability
+
+
+# Fires a shuriken that flies into a random enemy position
 class Shuriken(Ability):
     def __post__init__(self):
         self.sprites = []

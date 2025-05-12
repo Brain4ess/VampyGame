@@ -1,9 +1,12 @@
-import pygame as pg
-from data.UsefulFuncs import get_config
 import datetime as dt
+from abc import ABC, abstractmethod
+
+import pygame as pg
+
+from data.UsefulFunctions import get_config
 
 
-class Ability():
+class Ability(ABC):
     def __init__(self, screen: pg.Surface, ability: dict, player, group: pg.sprite.Group, enemy_group: pg.sprite.Group, timer):
         self.screen = screen
         self.group = group
@@ -27,5 +30,6 @@ class Ability():
         self.projectile_addition = 0
         self.__post__init__()
     
+    @abstractmethod
     def __post__init__(self):
         pass

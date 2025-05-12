@@ -145,21 +145,21 @@ class Game:
 
         if len(self.abilities_final) > 0:
             for i in range(len(self.abilities_final)):
-                self.ui.UpgButtons.children[i].set_invisible(False, True)
+                self.ui.upgradeButtons.children[i].set_invisible(False, True)
                 if self.abilities_final[i] in list(ABILITIES.keys()):
-                    self.ui.UpgButtons.children[i].children[1].set_text(ABILITIES[self.abilities_final[i]]['display_name'])
-                    self.ui.UpgButtons.children[i].children[0].img = pg.transform.scale(pg.image.load(ABILITIES[self.abilities_final[i]]['icon']), (64, 64))
+                    self.ui.upgradeButtons.children[i].children[1].set_text(ABILITIES[self.abilities_final[i]]['display_name'])
+                    self.ui.upgradeButtons.children[i].children[0].img = pg.transform.scale(pg.image.load(ABILITIES[self.abilities_final[i]]['icon']), (64, 64))
                 else:
-                    self.ui.UpgButtons.children[i].children[1].set_text(PASSIVES[self.abilities_final[i]]['display_name'])
-                    self.ui.UpgButtons.children[i].children[0].img = pg.transform.scale(pg.image.load(PASSIVES[self.abilities_final[i]]['icon']), (64, 64))
+                    self.ui.upgradeButtons.children[i].children[1].set_text(PASSIVES[self.abilities_final[i]]['display_name'])
+                    self.ui.upgradeButtons.children[i].children[0].img = pg.transform.scale(pg.image.load(PASSIVES[self.abilities_final[i]]['icon']), (64, 64))
                 
-                self.ui.UpgButtons.children[i].children[1].refresh_surfaces_build()   
-                self.ui.UpgButtons.children[i].children[0].refresh_surfaces_build()
-                self.ui.UpgButtons.children[i].refresh_surfaces_build()
+                self.ui.upgradeButtons.children[i].children[1].refresh_surfaces_build()   
+                self.ui.upgradeButtons.children[i].children[0].refresh_surfaces_build()
+                self.ui.upgradeButtons.children[i].refresh_surfaces_build()
                 
-            if len(self.abilities_final) < len(self.ui.UpgButtons.children):
-                for i in range(len(self.abilities_final), len(self.ui.UpgButtons.children)):
-                    self.ui.UpgButtons.children[i].set_invisible(True, True)
+            if len(self.abilities_final) < len(self.ui.upgradeButtons.children):
+                for i in range(len(self.abilities_final), len(self.ui.upgradeButtons.children)):
+                    self.ui.upgradeButtons.children[i].set_invisible(True, True)
 
     def pauseLoop(self):
         self.eventGame()
@@ -211,9 +211,9 @@ class Game:
                 while not self.chosen:
                     self.eventGame()
                     self.ui.update_Upgrade()
-                    for i in range(len(self.ui.UpgButtons.children)):
-                        if self.ui.UpgButtons.children[i].state == "unclicked":
-                            if '[•]' in self.ui.UpgButtons.children[i].children[1].text:
+                    for i in range(len(self.ui.upgradeButtons.children)):
+                        if self.ui.upgradeButtons.children[i].state == "unclicked":
+                            if '[•]' in self.ui.upgradeButtons.children[i].children[1].text:
                                 if self.player.get_passive(self.abilities_final[i]) != None:
                                     self.player.get_passive(self.abilities_final[i]).onlevelup()
                                 else:

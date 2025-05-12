@@ -1,5 +1,7 @@
 from ..classPassive import Passive
 
+
+# Allows you to respawn once after death
 class Cheese(Passive):
     def __post__init__(self):
         self.onlevelup()

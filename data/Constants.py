@@ -1,3 +1,4 @@
+
 PATHS: dict = {
     'Buttons': {
         'playButton': 'assets/images/placeholders/buttons/playButton.png',

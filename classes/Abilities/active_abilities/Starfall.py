@@ -1,9 +1,12 @@
-from ..classAbility import Ability
-import pygame as pg
 from random import choice
 
-from data.UsefulFuncs import get_config, load_images_from_dir
+import pygame as pg
 
+from data.UsefulFunctions import load_images_from_dir
+
+from ..classAbility import Ability
+
+# Starburst a specific enemy
 class Starfall(Ability):
     def __post__init__(self):
         self.right_sprites, self.left_sprites = load_images_from_dir(self.ability['sprite'], with_flip=True)

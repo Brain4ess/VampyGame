@@ -1,11 +1,15 @@
-from ..classAbility import Ability
-import pygame as pg
-from random import choice
 from datetime import timedelta
 from os import listdir
+from random import choice
 
-from data.UsefulFuncs import get_config, load_images_from_dir
+import pygame as pg
 
+from data.UsefulFunctions import get_config, load_images_from_dir
+
+from ..classAbility import Ability
+
+
+# Unleashes a lightning strike that attacks multiple targets with a slight delay
 class LightningStrike(Ability):
     def __post__init__(self):
         self.sprites = load_images_from_dir(self.ability['sprite'])

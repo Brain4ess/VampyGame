@@ -1,4 +1,7 @@
 from ..classPassive import Passive
+
+
+# +1 to projectiles per level for each ability a player has
 class Duplicator(Passive):
     def __post__init__(self):
         self.onlevelup()

@@ -1,7 +1,11 @@
-from ..classAbility import Ability
 import pygame as pg
 
-from data.UsefulFuncs import load_images_from_dir
+from data.UsefulFunctions import load_images_from_dir
+
+from ..classAbility import Ability
+
+
+# Slash attack that pushes enemies around, also increases the number of slashes depending on the passive ability 'Duplicator' pumping
 class Slash(Ability, pg.sprite.Sprite):
     def __post__init__(self):
         self.right_sprites = []

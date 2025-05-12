@@ -1,9 +1,14 @@
-from ..classAbility import Ability
-import pygame as pg
 from random import choice
 
+import pygame as pg
+
 from classes.Entities import Projectile
-from data.UsefulFuncs import load_images_from_dir
+from data.UsefulFunctions import load_images_from_dir
+
+from ..classAbility import Ability
+
+
+# Launches a homing shot that flies until it reaches its target (if the target is gone, it flies to the point where it died and then disappears)
 class HomingShot(Ability):
         def __post__init__(self):
             self.sprites = load_images_from_dir(self.ability['sprite'])

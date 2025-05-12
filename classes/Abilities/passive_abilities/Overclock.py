@@ -1,5 +1,7 @@
 from ..classPassive import Passive
 
+
+# Reduces the cooldowns of all abilities
 class Overclock(Passive):
     def __post__init__(self):
         self.onlevelup()

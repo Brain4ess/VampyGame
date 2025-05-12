@@ -28,13 +28,13 @@ class initui:
         self.resume = tp.Button("Resume", MM_BUTTON_STYLES['normal'], MM_BUTTON_STYLES['hover'], MM_BUTTON_STYLES['pressed'])
         self.exit_to_menu = tp.Button("Exit to menu", MM_BUTTON_STYLES['normal'], MM_BUTTON_STYLES['hover'], MM_BUTTON_STYLES['pressed'])
         self.quit = tp.Button("Quit game", MM_BUTTON_STYLES['normal'], MM_BUTTON_STYLES['hover'], MM_BUTTON_STYLES['pressed'])
-        self.pauseMenuButtonUpdater = tp.Group([self.resume, self.exit_to_menu, self.quit], gap=10).get_updater(const.FPS)
+        self.pauseMenuButtonsUpdater = tp.Group([self.resume, self.exit_to_menu, self.quit], gap=10).get_updater(const.FPS)
         
-        self.UpgButtons = tp.Group([], gap = 10)
+        self.upgradeButtons = tp.Group([], gap = 10)
         for i in range(6):
-            self.UpgButtons.add_child(tp.TextAndImageButton("Shuriken", pg.transform.scale(pg.image.load(CHARACTERS["Protagonist"]["characterPreview"]), (64, 64)), reverse=True, styleNormal=MM_BUTTON_STYLES['normal'], styleHover=MM_BUTTON_STYLES['hover'], stylePressed=MM_BUTTON_STYLES['pressed'], text_style=IMG_BUTTON_TEXT_STYLE))
+            self.upgradeButtons.add_child(tp.TextAndImageButton("Shuriken", pg.transform.scale(pg.image.load(CHARACTERS["Protagonist"]["characterPreview"]), (64, 64)), reverse=True, styleNormal=MM_BUTTON_STYLES['normal'], styleHover=MM_BUTTON_STYLES['hover'], stylePressed=MM_BUTTON_STYLES['pressed'], text_style=IMG_BUTTON_TEXT_STYLE))
 
-        self.UpgButtonsupd = self.UpgButtons.get_updater(const.FPS)
+        self.upgradeButtonsUpdater = self.upgradeButtons.get_updater(const.FPS)
 
 
 class UI:
@@ -48,17 +48,17 @@ class UI:
         self.lvlBar = ui.lvlBar
         self.healthBarUpdater = ui.healthBarUpdater
         self.lvlBarUpdater = ui.lvlBarUpdater
-        self.pauseMenuButtonUpdater = ui.pauseMenuButtonUpdater
+        self.pauseMenuButtonsUpdater = ui.pauseMenuButtonsUpdater
         self.resume.at_unclick_params = {"button": self.resume}
         self.exit_to_menu.at_unclick = self.changeButtonState
         self.exit_to_menu.at_unclick_params = {"button": self.exit_to_menu}
         self.quit.at_unclick = self.changeButtonState
         self.quit.at_unclick_params = {"button": self.quit}
-        self.UpgButtons = ui.UpgButtons
-        for i in self.UpgButtons.children:
+        self.upgradeButtons = ui.upgradeButtons
+        for i in self.upgradeButtons.children:
             i.at_unclick = self.changeButtonState
             i.at_unclick_params = {"button": i}
-        self.UpgButtonsupd = ui.UpgButtonsupd
+        self.upgradeButtonsUpdater = ui.upgradeButtonsUpdater
 
 
     def update(self):
@@ -78,8 +78,8 @@ class UI:
 
 
     def update_Pause(self):
-        self.pauseMenuButtonUpdater.update()
+        self.pauseMenuButtonsUpdater.update()
 
 
     def update_Upgrade(self):
-        self.UpgButtonsupd.update()
+        self.upgradeButtonsUpdater.update()
