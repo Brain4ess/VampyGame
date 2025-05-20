@@ -121,7 +121,7 @@ PASSIVES: dict = {
         'class': 'Mirror'
     },
     
-    # +1 to max_level to all abilities except self and rare passives
+    # +1 to max_level to all abilities except self
     'overlevel':{
         'name': 'overlevel',
         'display_name': 'Overlevel [•]',

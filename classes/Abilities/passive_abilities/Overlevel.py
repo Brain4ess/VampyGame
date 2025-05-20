@@ -1,7 +1,7 @@
 from ..classPassive import Passive
 
 
-# +1 to max_level to all abilities except self and rare passives
+# +1 to max_level to all abilities except self
 class Overlevel(Passive):
     def __post__init__(self):
         self.onlevelup()

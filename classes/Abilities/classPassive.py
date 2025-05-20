@@ -1,7 +1,9 @@
+from abc import ABC, abstractmethod
+
 import pygame as pg
 
 
-class Passive():
+class Passive(ABC):
     def __init__(self, screen: pg.Surface, passive: dict, player, timer):
         self.screen = screen
         self.player = player
@@ -13,6 +15,7 @@ class Passive():
         self.sprite = pg.transform.scale(pg.image.load(passive['icon']), (64, 64))
         self.__post__init__()
 
+    @abstractmethod
     def __post__init__(self):
         pass
 
