@@ -14,7 +14,7 @@ ENEMIES: dict = {
         'weight': 30,
         'exp': 10
     },
-    
+
     'orcShaman': {
         'sprites': 'assets/enemies/orcShaman',
         'image_multiplier': 1,
@@ -25,7 +25,7 @@ ENEMIES: dict = {
         'weight': 10,
         'exp': 20
     },
-    
+
     'orcWarrior': {
         'sprites': 'assets/enemies/orcWarrior',
         'image_multiplier': 1,

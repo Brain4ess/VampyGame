@@ -3,25 +3,6 @@ revision = 1
 requires-python = ">=3.12"
 
 [[package]]
-name = "VampyGame"
-version = "0.1.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "numpy" },
-    { name = "pillow" },
-    { name = "pygame" },
-    { name = "thorpy" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "numpy", specifier = ">=2.2.4" },
-    { name = "pillow", specifier = "==11.1.0" },
-    { name = "pygame", specifier = "==2.6.1" },
-    { name = "thorpy", specifier = "==2.1.11" },
-]
-
-[[package]]
 name = "numpy"
 version = "2.2.4"
 source = { registry = "https://pypi.org/simple" }
@@ -126,4 +107,23 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/b4/3f/45595c6a4b47ae031b3da4aefb624f049ac04c36552ba63218a19f27c1d2/thorpy-2.1.11.tar.gz", hash = "sha256:2b5fc335ffba37909a227a32a59e1ff7c16bfb143769db465848de7bdf7bcbee", size = 2112543 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/14/91/a6696af32120ff300651fe6e21c91541a02248d9fc5305338147c64dee4c/thorpy-2.1.11-py3-none-any.whl", hash = "sha256:947444120ff3661f56895112cd16d9f204fec1f5241db87042e4ff75fea58848", size = 2150356 },
+]
+
+[[package]]
+name = "vampygame"
+version = "0.1.1"
+source = { virtual = "." }
+dependencies = [
+    { name = "numpy" },
+    { name = "pillow" },
+    { name = "pygame" },
+    { name = "thorpy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "numpy", specifier = ">=2.2.4" },
+    { name = "pillow", specifier = "==11.1.0" },
+    { name = "pygame", specifier = "==2.6.1" },
+    { name = "thorpy", specifier = "==2.1.11" },
 ]

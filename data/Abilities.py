@@ -1,3 +1,4 @@
+'''A module that stores active/passive abilities data'''
 # name: Code name of the ability
 # display_name: Display name of the ability
 # icon: Path to the icon of the ability that appears in the upgrade menu
@@ -5,7 +6,7 @@
 # sound: Path to the sound of the ability (It sounds when the ability hits the enemy)
 
 ABILITIES: dict = {
-    
+
     # Fires a shuriken that flies into a random enemy position
     "shuriken": {
         'name': 'shuriken',
@@ -15,12 +16,12 @@ ABILITIES: dict = {
         'speed': 7,
         'class': 'Shuriken',
         'sound': None,
-        'damage': 7,
+        'damage': 70, # TODO: Вернуть
         'lifetime': 2,
         'cooldown': 2,
         'max_level': 5
     },
-    
+
     # Launches a homing shot that flies until it reaches its target (if the target is gone, it flies to the point where it died and then disappears)
     "homing shot": {
         'name': 'homing shot',
@@ -36,7 +37,7 @@ ABILITIES: dict = {
         'max_level': 5,
         'hp': 1
     },
-    
+
     # Unleashes a lightning strike that attacks multiple targets with a slight delay
     "lightning strike": {
         'name': 'lightning strike',
@@ -53,7 +54,7 @@ ABILITIES: dict = {
         'max_level': 5,
         'max_enemies': 3
     },
-    
+
     # Starburst a specific enemy
     "starfall": {
         'name': 'starfall',
@@ -68,7 +69,7 @@ ABILITIES: dict = {
         'cooldown': 5,
         'max_level': 5
     },
-    
+
     # Slash attack that pushes enemies around, also increases the number of slashes depending on the passive ability 'Duplicator' pumping
     "slash": {
         'name': 'slash',
@@ -93,7 +94,7 @@ ABILITIES: dict = {
 
 # All passive abilities have '[•]' in their names
 PASSIVES: dict = {
-    
+
     # +1 to projectiles per level for each ability a player has
     'duplicator': {
         'name': 'duplicator',
@@ -102,7 +103,7 @@ PASSIVES: dict = {
         'max_level': 3,
         'class': 'Duplicator'
     },
-    
+
     # Reduces the cooldowns of all abilities
     'overclock': {
         'name': 'overclock',
@@ -111,7 +112,7 @@ PASSIVES: dict = {
         'max_level': 3,
         'class': 'Overclock'
     },
-    
+
     # Clones random active ability
     'mirror': {
         'name': 'mirror',
@@ -120,7 +121,7 @@ PASSIVES: dict = {
         'max_level': 5,
         'class': 'Mirror'
     },
-    
+
     # +1 to max_level to all abilities except self
     'overlevel':{
         'name': 'overlevel',
@@ -129,7 +130,7 @@ PASSIVES: dict = {
         'max_level': 1,
         'class': 'Overlevel'
     },
-    
+
     # Gives you more experience from killing enemies
     'moreExp': {
         'name': 'moreExp',
@@ -138,7 +139,7 @@ PASSIVES: dict = {
         'max_level': 3,
         'class': 'MoreExp'
     },
-    
+
     # Allows you to respawn once after death
     'cheese': {
         'name': 'cheese',
