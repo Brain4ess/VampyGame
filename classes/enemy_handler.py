@@ -3,11 +3,11 @@ import random
 
 import pygame as pg
 
-from classes.classCamera import Camera
-from classes.classCharacter import Character
-from classes.classTimer import Timer
-from classes.Entities import Enemy
-from data.Enemies import ENEMIES
+from classes.class_camera import Camera
+from classes.class_character import Character
+from classes.class_timer import Timer
+from classes.entities import Enemy
+from data.enemies import ENEMIES
 
 
 class EnemyHandler:

@@ -4,15 +4,16 @@ from random import choice
 import pygame as pg
 from pygame.locals import *
 
-import data.Constants as const
-from classes.classBackground import BG
-from classes.classCamera import Camera
-from classes.classCharacter import Character
-from classes.classTimer import Timer
-from classes.EnemyHandler import EnemyHandler
-from data.Abilities import ABILITIES, PASSIVES
-from UI.classGameScreen import GameScreen
-from UI.GameUI import UI, InitUI
+import data.constants as const
+from classes.class_background import BG
+from classes.class_camera import Camera
+from classes.class_character import Character
+from classes.class_timer import Timer
+from classes.enemy_handler import EnemyHandler
+from data.active_abilities import ACTIVE_ABILITIES
+from data.passive_abilities import PASSIVE_ABILITIES
+from UI.game_screen import GameScreen
+from UI.game_ui import UI, InitUI
 
 cfg = cfgp.ConfigParser()
 cfg.read('data/config.ini')
@@ -224,7 +225,7 @@ class Game:
                 upg_abilities.append(ability.name)
 
         if len(self.player.abilities) < 5:
-            all_abilities = list(ABILITIES.keys()).copy()
+            all_abilities = list(ACTIVE_ABILITIES.keys()).copy()
 
             for ability in self.player.abilities:
                 if not 'mirrored' in ability.name:
@@ -248,7 +249,7 @@ class Game:
                 upg_passives.append(passive.name)
 
         if len(self.player.passives) < 5:
-            all_passives = list(PASSIVES.keys()).copy()
+            all_passives = list(PASSIVE_ABILITIES.keys()).copy()
 
             for passive in self.player.passives:
                 all_passives.remove(passive.name)
@@ -276,15 +277,15 @@ class Game:
             for i, ability in enumerate(self.abilities_final):
                 self.ui.upgrade_btns.children[i].set_invisible(False, True)
 
-                if ability in list(ABILITIES.keys()):
-                    self.ui.upgrade_btns.children[i].children[1].set_text(ABILITIES[ability]['display_name'])
+                if ability in list(ACTIVE_ABILITIES.keys()):
+                    self.ui.upgrade_btns.children[i].children[1].set_text(ACTIVE_ABILITIES[ability]['display_name'])
                     self.ui.upgrade_btns.children[i].children[0].img = pg.transform.scale(
-                        pg.image.load(ABILITIES[ability]['icon']), (64, 64)
+                        pg.image.load(ACTIVE_ABILITIES[ability]['icon']), (64, 64)
                     )
                 else:
-                    self.ui.upgrade_btns.children[i].children[1].set_text(PASSIVES[ability]['display_name'])
+                    self.ui.upgrade_btns.children[i].children[1].set_text(PASSIVE_ABILITIES[ability]['display_name'])
                     self.ui.upgrade_btns.children[i].children[0].img = pg.transform.scale(
-                        pg.image.load(PASSIVES[ability]['icon']), (64, 64)
+                        pg.image.load(PASSIVE_ABILITIES[ability]['icon']), (64, 64)
                     )
 
                 self.ui.upgrade_btns.children[i].children[1].refresh_surfaces_build()

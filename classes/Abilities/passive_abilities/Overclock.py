@@ -1,8 +1,8 @@
-from ..classPassive import Passive
+from ..class_passive_ability import PassiveAbility
 
 
 # Reduces the cooldowns of all abilities
-class Overclock(Passive):
+class Overclock(PassiveAbility):
     """
     A passive ability that provides cooldown reduction benefits for player abilities.
     

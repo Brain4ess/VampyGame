@@ -1,6 +1,6 @@
 import pygame as pg
 
-from classes.classCharacter import Character
+from classes.class_character import Character
 
 
 class Camera:

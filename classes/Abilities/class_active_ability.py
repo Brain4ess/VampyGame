@@ -3,10 +3,10 @@ from abc import ABC, abstractmethod
 
 import pygame as pg
 
-from data.UsefulFunctions import get_config
+from functions.get_config import get_config
 
 
-class Ability(ABC):
+class ActiveAbility(ABC):
     """
     Abstract base class for player abilities in a game system.
     

@@ -5,12 +5,12 @@ import thorpy as tp
 from pygame.image import load
 from pygame.transform import scale
 
-import data.Constants as const
-from classes.classBackground import BG
-from data.Characters import CHARACTERS
-from data.GuiData import (IMG_BUTTON_TEXT_STYLE, MM_BUTTON_STYLES,
+import data.constants as const
+from classes.class_background import BG
+from data.characters import CHARACTERS
+from data.gui_data import (IMG_BUTTON_TEXT_STYLE, MM_BUTTON_STYLES,
                           SM_BUTTON_STYLES)
-from UI.classGameScreen import GameScreen
+from UI.game_screen import GameScreen
 
 cfg = cfgp.ConfigParser()
 cfg.read('data/config.ini')

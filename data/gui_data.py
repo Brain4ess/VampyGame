@@ -1,6 +1,6 @@
 import pygame as pg
 import thorpy as tp
-import data.Constants as const
+import data.constants as const
 # TODO: Нужно подписать что к чему относится и нафиг оно надо
 MM_BUTTON_STYLE_NORMAL = tp.styles.RoundStyle()
 MM_BUTTON_STYLE_NORMAL.bck_color = (28,28,28)

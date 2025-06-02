@@ -4,13 +4,14 @@ from random import choice
 
 import pygame as pg
 
-from data.UsefulFunctions import get_config, load_images_from_dir
+from functions.get_config import get_config
+from functions.load_images_from_dir import load_images_from_dir
 
-from ..classAbility import Ability
+from ..class_active_ability import ActiveAbility
 
 
 # Unleashes a lightning strike that attacks multiple targets with a slight delay
-class LightningStrike(Ability):
+class LightningStrike(ActiveAbility):
     """
     A lightning strike ability that targets random enemies with animated lightning attacks.
     

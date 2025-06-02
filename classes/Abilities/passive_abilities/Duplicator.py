@@ -1,8 +1,8 @@
-from ..classPassive import Passive
+from ..class_passive_ability import PassiveAbility
 
 
 # +1 to projectiles per level for each ability a player has
-class Duplicator(Passive):
+class Duplicator(PassiveAbility):
     """
     A passive ability that duplicates projectiles for all player abilities.
     

@@ -1,11 +1,11 @@
-'''A module that stores active/passive abilities data'''
+'''A module that stores active abilities data'''
 # name: Code name of the ability
 # display_name: Display name of the ability
 # icon: Path to the icon of the ability that appears in the upgrade menu
 # sprite: Path to the sprites of the ability that appears in the game
 # sound: Path to the sound of the ability (It sounds when the ability hits the enemy)
 
-ABILITIES: dict = {
+ACTIVE_ABILITIES: dict = {
 
     # Fires a shuriken that flies into a random enemy position
     "shuriken": {
@@ -16,15 +16,15 @@ ABILITIES: dict = {
         'speed': 7,
         'class': 'Shuriken',
         'sound': None,
-        'damage': 70, # TODO: Вернуть
+        'damage': 70,
         'lifetime': 2,
         'cooldown': 2,
         'max_level': 5
     },
 
     # Launches a homing shot that flies until it reaches its target (if the target is gone, it flies to the point where it died and then disappears)
-    "homing shot": {
-        'name': 'homing shot',
+    "homing_shot": {
+        'name': 'homing_shot',
         'display_name': 'Homing Shot',
         'icon': 'assets/images/abilities/active_abilities/HomingShot/1.png',
         'sprite': 'assets/images/abilities/active_abilities/HomingShot',
@@ -39,8 +39,8 @@ ABILITIES: dict = {
     },
 
     # Unleashes a lightning strike that attacks multiple targets with a slight delay
-    "lightning strike": {
-        'name': 'lightning strike',
+    "lightning_strike": {
+        'name': 'lightning_strike',
         'display_name': 'Lightning Strike',
         'icon': 'assets/images/abilities/active_abilities/LightningStrike/2.png',
         'sprite': 'assets/images/abilities/active_abilities/LightningStrike',
@@ -89,63 +89,5 @@ ABILITIES: dict = {
         'lifetime': 0,
         'cooldown': 10,
         'max_level': 5
-    }
-}
-
-# All passive abilities have '[•]' in their names
-PASSIVES: dict = {
-
-    # +1 to projectiles per level for each ability a player has
-    'duplicator': {
-        'name': 'duplicator',
-        'display_name': 'Duplicator [•]',
-        'icon': 'assets/images/abilities/passives/duplicator/icon.png',
-        'max_level': 3,
-        'class': 'Duplicator'
-    },
-
-    # Reduces the cooldowns of all abilities
-    'overclock': {
-        'name': 'overclock',
-        'display_name': 'Overclock [•]',
-        'icon': 'assets/images/abilities/passives/overclock/icon.png',
-        'max_level': 3,
-        'class': 'Overclock'
-    },
-
-    # Clones random active ability
-    'mirror': {
-        'name': 'mirror',
-        'display_name': 'Mirror [•]',
-        'icon': 'assets/images/abilities/passives/mirror/icon.png',
-        'max_level': 5,
-        'class': 'Mirror'
-    },
-
-    # +1 to max_level to all abilities except self
-    'overlevel':{
-        'name': 'overlevel',
-        'display_name': 'Overlevel [•]',
-        'icon': 'assets/images/abilities/passives/overlevel/icon.webp',
-        'max_level': 1,
-        'class': 'Overlevel'
-    },
-
-    # Gives you more experience from killing enemies
-    'moreExp': {
-        'name': 'moreExp',
-        'display_name': 'More Experience [•]',
-        'icon': 'assets/images/abilities/passives/more experience/icon.png',
-        'max_level': 3,
-        'class': 'MoreExp'
-    },
-
-    # Allows you to respawn once after death
-    'cheese': {
-        'name': 'cheese',
-        'display_name': 'Cheese [•]',
-        'icon': 'assets/images/abilities/passives/cheese/icon.png',
-        'max_level': 1,
-        'class': 'Cheese'
     }
 }

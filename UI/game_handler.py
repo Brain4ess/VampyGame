@@ -2,11 +2,11 @@ import configparser as cfgp
 
 import pygame as pg
 
-import UI.classMainMenu as mm
-from classes.classGame import Game
-from data.Constants import PATHS
-from UI.classGameScreen import GameScreen
-from UI.GameUI import InitUI
+import UI.main_menu as mm
+from classes.class_game import Game
+from data.constants import PATHS
+from UI.game_screen import GameScreen
+from UI.game_ui import InitUI
 
 cfg = cfgp.ConfigParser()
 cfg.read('data/config.ini')

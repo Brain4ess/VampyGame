@@ -1,8 +1,8 @@
-from ..classPassive import Passive
+from ..class_passive_ability import PassiveAbility
 
 
 # Allows you to respawn once after death
-class Cheese(Passive):
+class Cheese(PassiveAbility):
     """
     A passive item that automatically triggers level progression and rewards the player.
     

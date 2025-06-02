@@ -2,12 +2,12 @@ from random import choice
 
 import pygame as pg
 
-from data.UsefulFunctions import load_images_from_dir
+from functions.load_images_from_dir import load_images_from_dir
 
-from ..classAbility import Ability
+from ..class_active_ability import ActiveAbility
 
 # Starburst a specific enemy
-class Starfall(Ability):
+class Starfall(ActiveAbility):
     """
     A special ability that creates a starfall attack targeting enemies.
     

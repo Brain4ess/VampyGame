@@ -1,8 +1,8 @@
-from ..classPassive import Passive
+from ..class_passive_ability import PassiveAbility
 
 
 # Gives you more experience from killing enemies
-class MoreExp(Passive):
+class MoreExp(PassiveAbility):
     """
     A passive ability that enhances experience gain for the player.
     

@@ -2,14 +2,14 @@ from random import choice as random_choice
 
 import pygame as pg
 
-from classes.Entities import Projectile
-from data.Constants import FPS
+from classes.entities import Projectile
+from data.constants import FPS
 
-from ..classAbility import Ability
+from ..class_active_ability import ActiveAbility
 
 
 # Fires a shuriken that flies into a random enemy position
-class Shuriken(Ability):
+class Shuriken(ActiveAbility):
     """
     A projectile-based ability that launches rotating shuriken towards enemies.
     

@@ -2,14 +2,14 @@ from random import choice
 
 import pygame as pg
 
-from classes.Entities import Projectile
-from data.UsefulFunctions import load_images_from_dir
+from classes.entities import Projectile
+from functions.load_images_from_dir import load_images_from_dir
 
-from ..classAbility import Ability
+from ..class_active_ability import ActiveAbility
 
 
 # Launches a homing shot that flies until it reaches its target (if the target is gone, it flies to the point where it died and then disappears)
-class HomingShot(Ability):
+class HomingShot(ActiveAbility):
     """
     A homing projectile weapon system that fires tracking missiles at enemies.
     

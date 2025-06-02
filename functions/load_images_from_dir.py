@@ -1,21 +1,13 @@
-import configparser as cfgp
 import os
 
 import pygame as pg
 
-cfg = cfg = cfgp.ConfigParser()
-cfg.read('data/config.ini')
 
-def get_config() -> cfgp.ConfigParser:
-    """
-    Get the current configuration object.
-    
-    Returns:
-        object: The configuration object containing application settings.
-    """
-    return cfg
-
-def load_images_from_dir(path, rotation: int = 0, with_flip: bool = False, flip_vertical: bool = False):
+def load_images_from_dir(path,
+                         rotation: int = 0,
+                         with_flip: bool = False,
+                         flip_vertical: bool = False
+):
     """
     Load images from a directory and apply optional transformations.
     

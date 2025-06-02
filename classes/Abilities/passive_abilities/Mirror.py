@@ -1,10 +1,10 @@
 from random import choice
 
-from ..classPassive import Passive
+from ..class_passive_ability import PassiveAbility
 
 
 # Clones random active ability
-class Mirror(Passive):
+class Mirror(PassiveAbility):
     """
     A passive ability that creates a mirrored copy of another random ability.
     

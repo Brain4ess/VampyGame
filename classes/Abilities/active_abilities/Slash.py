@@ -1,12 +1,12 @@
 import pygame as pg
 
-from data.UsefulFunctions import load_images_from_dir
+from functions.load_images_from_dir import load_images_from_dir
 
-from ..classAbility import Ability
+from ..class_active_ability import ActiveAbility
 
 
 # Slash attack that pushes enemies around, also increases the number of slashes depending on the passive ability 'Duplicator' pumping
-class Slash(Ability, pg.sprite.Sprite):
+class Slash(ActiveAbility, pg.sprite.Sprite):
     """
     A projectile ability that creates animated slash attacks around the player.
     

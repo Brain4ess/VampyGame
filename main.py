@@ -8,9 +8,9 @@ import configparser as cfgp
 
 import thorpy as tp
 
-from UI.classGameScreen import GameScreen
-from UI.GameHandler import GameHandler
-from UI.GameUI import InitUI
+from UI.game_screen import GameScreen
+from UI.game_handler import GameHandler
+from UI.game_ui import InitUI
 
 cfg = cfgp.ConfigParser()
 cfg.read('data/config.ini')

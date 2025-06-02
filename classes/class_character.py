@@ -7,8 +7,9 @@ from pygame.sprite import Sprite
 from pygame.transform import flip, scale_by
 
 from classes import Abilities
-import data.Abilities as ab
-from data.Characters import CHARACTERS
+from data.active_abilities import ACTIVE_ABILITIES
+from data.characters import CHARACTERS
+from data.passive_abilities import PASSIVE_ABILITIES
 
 
 class Character(Sprite):
@@ -86,11 +87,11 @@ class Character(Sprite):
         self.rect = self.plr_spr_left[0].get_rect(center = (self.screen_width / 2, self.screen_height / 2))
         self.old_rect = self.rect.copy()
         self.size = (self.plr_spr_left[int(self.curr_sprite)].get_width(), self.plr_spr_left[int(self.curr_sprite)].get_height())
-        ability_class = getattr(Abilities, ab.ABILITIES[CHARACTERS[character]['startAbility']]['class'])
+        ability_class = getattr(Abilities, ACTIVE_ABILITIES[CHARACTERS[character]['startAbility']]['class'])
         self.abilities = [
             ability_class(
                 self.screen,
-                ab.ABILITIES[CHARACTERS[character]['startAbility']],
+                ACTIVE_ABILITIES[CHARACTERS[character]['startAbility']],
                 self,
                 self.group,
                 self.enemy_group,
@@ -237,15 +238,15 @@ class Character(Sprite):
         
         Args:
             name (str): The name of the ability to add. This name should correspond to a
-                       key in the ab.ABILITIES dictionary that contains the ability
+                       key in the ACTIVE_ABILITIES dictionary that contains the ability
                        configuration including the class name.
         
         Raises:
             AttributeError: If the ability class is not found in the Abilities module.
-            KeyError: If the ability name is not found in ab.ABILITIES dictionary.
+            KeyError: If the ability name is not found in ACTIVE_ABILITIES dictionary.
         """
-        ability_class = getattr(Abilities, ab.ABILITIES[name]['class'])
-        self.abilities.append(ability_class(self.screen, ab.ABILITIES[name], self, self.group, self.enemy_group, self.timer))
+        ability_class = getattr(Abilities, ACTIVE_ABILITIES[name]['class'])
+        self.abilities.append(ability_class(self.screen, ACTIVE_ABILITIES[name], self, self.group, self.enemy_group, self.timer))
 
     def add_passive(self, name: str) -> None:
         """
@@ -262,8 +263,8 @@ class Character(Sprite):
             AttributeError: If the specified ability class doesn't exist in Abilities module.
             KeyError: If the name doesn't exist in ab.PASSIVES dictionary.
         """
-        ability_class = getattr(Abilities, ab.PASSIVES[name]['class'])
-        self.passives.append(ability_class(self.screen, ab.PASSIVES[name], self, self.timer))
+        ability_class = getattr(Abilities, PASSIVE_ABILITIES[name]['class'])
+        self.passives.append(ability_class(self.screen, PASSIVE_ABILITIES[name], self, self.timer))
 
     def level_up(self) -> None:
         """

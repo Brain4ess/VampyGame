@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 import pygame as pg
 
 
-class Passive(ABC):
+class PassiveAbility(ABC):
     """
     Abstract base class for passive abilities in a game system.
     

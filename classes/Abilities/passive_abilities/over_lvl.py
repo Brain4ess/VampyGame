@@ -1,8 +1,8 @@
-from ..classPassive import Passive
+from ..class_passive_ability import PassiveAbility
 
 
 # +1 to max_level to all abilities except self
-class Overlevel(Passive):
+class OverLvl(PassiveAbility):
     """
     A passive ability that increases the maximum level of other abilities and passives.
     

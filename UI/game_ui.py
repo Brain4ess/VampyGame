@@ -1,10 +1,10 @@
 import pygame as pg
 import thorpy as tp
 
-import data.Constants as const
-from classes.classCharacter import Character
-from data.Characters import CHARACTERS
-from data.GuiData import IMG_BUTTON_TEXT_STYLE, MM_BUTTON_STYLES
+import data.constants as const
+from classes.class_character import Character
+from data.characters import CHARACTERS
+from data.gui_data import IMG_BUTTON_TEXT_STYLE, MM_BUTTON_STYLES
 
 
 class InitUI:
