@@ -1,7 +1,8 @@
 import pygame as pg
 import thorpy as tp
 import data.constants as const
-# TODO: Нужно подписать что к чему относится и нафиг оно надо
+
+# Main Menu buttons
 MM_BUTTON_STYLE_NORMAL = tp.styles.RoundStyle()
 MM_BUTTON_STYLE_NORMAL.bck_color = (28,28,28)
 MM_BUTTON_STYLE_NORMAL.font_color = (176, 55, 80)
@@ -24,6 +25,7 @@ MM_BUTTON_STYLES = {
     'pressed': MM_BUTTON_STYLE_PRESSED
 }
 
+# Settings Menu buttons
 SM_BUTTON_STYLE_NORMAL = MM_BUTTON_STYLE_NORMAL.copy()
 SM_BUTTON_STYLE_NORMAL.font = pg.font.Font(const.PATHS['Fonts']['mainMenu']['Buttons_caps'], 30)
 SM_BUTTON_STYLE_NORMAL.size = (300, 60)
