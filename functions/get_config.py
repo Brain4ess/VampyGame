@@ -1,3 +1,4 @@
+'''This module provides a function to retrieve the current configuration object.'''
 import configparser as cfgp
 
 cfg = cfgp.ConfigParser()

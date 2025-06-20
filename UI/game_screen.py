@@ -1,3 +1,4 @@
+'''This module contains the game screen manager class for creating and managing display windows in a pygame-based game.'''
 from dataclasses import dataclass
 
 import pygame as pg

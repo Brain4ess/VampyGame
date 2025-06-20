@@ -1,3 +1,4 @@
+'''This module contains the user interface management class for a game that handles various UI elements including health bars, level bars, and menu buttons.'''
 import pygame as pg
 import thorpy as tp
 

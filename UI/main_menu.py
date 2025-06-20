@@ -1,3 +1,4 @@
+'''This module contains the main menu interface for the game.'''
 import configparser as cfgp
 
 import pygame as pg
