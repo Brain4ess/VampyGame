@@ -1,3 +1,4 @@
+'''This module contains the background class for the game. It handles the background image and its rendering.'''
 import pygame as pg
 from pygame.image import load
 from pygame.locals import *

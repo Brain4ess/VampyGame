@@ -1,4 +1,4 @@
-'''Load images from a directory and apply optional transformations.'''
+'''This module loads images from a directory and apply optional transformations.'''
 import os
 
 import pygame as pg

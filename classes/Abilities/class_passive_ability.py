@@ -1,3 +1,4 @@
+'''This module contains the PassiveAbility class for the game. It handles passive abilities that can be applied to a player character.'''
 from abc import ABC, abstractmethod
 
 import pygame as pg

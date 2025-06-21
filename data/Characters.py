@@ -1,3 +1,4 @@
+'''This module contains information about all characters in the game.'''
 # sprites: Path to the character's sprite folder with the walk animation
 # scale_by: Number that determine the size increase of character sprites (Default: 1)
 # characterPreview: Image that appears in the 'Character Select' menu

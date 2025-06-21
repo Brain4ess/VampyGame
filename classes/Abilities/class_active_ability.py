@@ -1,3 +1,4 @@
+'''This module contains the ActiveAbility class for the game. It handles active abilities that can be used by a player character to attack enemies.'''
 import datetime as dt
 from abc import ABC, abstractmethod
 

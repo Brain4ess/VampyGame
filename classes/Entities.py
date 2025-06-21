@@ -1,3 +1,4 @@
+'''This module contains the Enemy class for the game. It handles the enemy's movement, collision detection, and damage dealing.'''
 import configparser as cfgp
 import datetime as dt
 from math import sqrt

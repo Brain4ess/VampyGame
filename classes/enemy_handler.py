@@ -1,3 +1,4 @@
+'''This module contains the EnemyHandler class for enemy management in the game.'''
 import datetime as dt
 import random
 

@@ -1,3 +1,4 @@
+'''This module contains the camera class for the game. It handles the camera position and movement based on the target character.'''
 import pygame as pg
 
 from classes.class_character import Character

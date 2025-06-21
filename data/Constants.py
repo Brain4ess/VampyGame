@@ -1,3 +1,4 @@
+'''This module contains constants for the game.'''
 
 PATHS: dict = {
 
