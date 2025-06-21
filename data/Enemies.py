@@ -1,3 +1,4 @@
+'''This module contains information about all enemies in the game.'''
 # image_multiplier: Number that determine the size increase of enemy sprites (Default: 1)
 # sound: The sound that will be played when an enemy is hit (Default: None)
 # weight: The number responsible for the frequency of enemy appearances (more means more often)

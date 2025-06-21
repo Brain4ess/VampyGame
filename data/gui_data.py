@@ -1,3 +1,4 @@
+'''This module contains constants and styles for the game UI elements.'''
 import pygame as pg
 import thorpy as tp
 import data.constants as const

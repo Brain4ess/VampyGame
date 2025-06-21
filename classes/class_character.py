@@ -1,3 +1,4 @@
+'''This module contains the character class for the game. It handles the player's movement, combat, and ability management.'''
 import os
 
 import pygame as pg

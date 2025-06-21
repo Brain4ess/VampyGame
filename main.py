@@ -1,4 +1,4 @@
-"""The module you need to run the game"""
+"""This module need you to run the game"""
 from sys import exit as sys_exit
 import pygame as pg
 

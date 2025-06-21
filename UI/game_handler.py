@@ -1,3 +1,4 @@
+'''This module contains the game handler class for the game.'''
 import configparser as cfgp
 
 import pygame as pg

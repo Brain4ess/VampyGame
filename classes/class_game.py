@@ -1,3 +1,4 @@
+'''This module contains the game class for the game. It handles the main game loop, character, enemy, and UI management.'''
 import configparser as cfgp
 from random import choice
 

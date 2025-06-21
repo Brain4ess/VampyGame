@@ -1,3 +1,4 @@
+'''This module contains the Timer class for real-time elapsed time tracking and display.'''
 import datetime
 
 import pygame as pg
